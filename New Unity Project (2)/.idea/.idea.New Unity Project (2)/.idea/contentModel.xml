@@ -8,10 +8,11 @@
       <e p="Assets" t="Include">
         <e p="Resources" t="Include">
           <e p="Scripts" t="Include">
-            <e p="Point.cs" t="Include" />
+            <e p="CubePoint.cs" t="Include" />
+            <e p="HexaPoint.cs" t="Include" />
+            <e p="MonoSingleton.cs" t="Include" />
             <e p="Tile.cs" t="Include" />
             <e p="TileManager.cs" t="Include" />
-            <e p="Utils" t="Include" />
           </e>
         </e>
       </e>

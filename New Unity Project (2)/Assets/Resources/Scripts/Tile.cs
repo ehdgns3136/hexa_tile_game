@@ -1,16 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Resources.Scripts;
 
 public class Tile : MonoBehaviour
 {
-    private Point _point;
     private float _length;
+    private HexaPoint _hexaPoint;
+    private CubePoint _cubePoint;
 
-    public Point Point
-    {
-        get { return _point; }
-        set { _point = value; }
-    }
+    private GameObject _redTile;
 
     public float Length
     {
@@ -18,10 +16,36 @@ public class Tile : MonoBehaviour
         set { _length = value; }
     }
 
+    public HexaPoint HexaPoint
+    {
+        get { return _hexaPoint; }
+        set { _hexaPoint = value; }
+    }
+
+    public CubePoint CubePoint
+    {
+        get { return _cubePoint; }
+        set { _cubePoint = value; }
+    }
+
+    public GameObject RedTile
+    {
+        get { return _redTile; }
+        set { _redTile = value; }
+    }
+
+//    public Tile()
+//    {
+//        RedTile = transform.Find("Select").gameObject;
+//    }
+
     public void OnClick()
     {
         // why there is no on click
-        Debug.Log("Row, Col : " + _point.Row + ", " + _point.Col);
-        Debug.Log("X, Y, Z : " + _point.X + ", " + _point.Y + ", " + _point.Z);
+        Debug.Log("Row, Col : " + HexaPoint.Row + ", " + HexaPoint.Col);
+        Debug.Log("X, Y, Z : " + CubePoint.X + ", " + CubePoint.Y + ", " + CubePoint.Z);
+        
+        TileManager.Instance.HighlightNeighbor(CubePoint);
+        
     }
 }

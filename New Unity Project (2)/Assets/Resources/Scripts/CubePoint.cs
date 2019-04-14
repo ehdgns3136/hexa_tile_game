@@ -2,25 +2,11 @@ using System;
 
 namespace Resources.Scripts
 {
-    public class Point : IEquatable<Point>
+    public class CubePoint : IEquatable<CubePoint>
     {
-        private int _row;
-        private int _col;
         private int _x;
         private int _y;
         private int _z;
-
-        public int Row
-        {
-            get { return _row; }
-            set { _row = value; }
-        }
-
-        public int Col
-        {
-            get { return _col; }
-            set { _col = value; }
-        }
 
         public int X
         {
@@ -39,20 +25,20 @@ namespace Resources.Scripts
             get { return _z; }
             set { _z = value; }
         }
-
-        public bool Equals(Point point)
+        
+        public bool Equals(CubePoint point)
         {
             if (point == null) return false;
-            return _x == point.X && _y == point.Y && _z == point.Z;
+            return X == point.X && Y == point.Y && Z == point.Z;
         }
 
         public override int GetHashCode()
         {
-            string hash = Row + "|" + Col;
+            string hash = X + "|" + Y + "|" + Z;
             return hash.GetHashCode();
         }
 
-        public Point(int row, int col)
+        public CubePoint(int row, int col)
         {
             int x = col - (row - (row & 1)) / 2;
             int z = row;
@@ -61,8 +47,17 @@ namespace Resources.Scripts
             X = x;
             Y = y;
             Z = z;
-            Row = row;
-            Col = col;
+        }
+
+        public CubePoint(int x, int y, int z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+        
+        public static CubePoint operator+ (CubePoint p1, CubePoint p2) {
+            return new CubePoint(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
         }
     }
 }
