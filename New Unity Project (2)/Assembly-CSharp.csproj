@@ -63,7 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\TileManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Point.cs" />
+    <Compile Include="Assets\Resources\Scripts\Tile.cs" />
+    <Compile Include="Assets\Resources\Scripts\TileManager.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/ehdgn/Desktop/Donghoon Kim/new_game/hexa_tile_game/New Unity Project (2)/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/Assets/Resources/Scripts/Tile.cs" line="6" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2340d807-1a59-487d-8e91-5c1b9b0b2ece" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.New Unity Project (2)/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../game_board_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../game_board_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/3b6f822c3a6a92be483baf2765f79b74.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/drib_icons.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/hexa_icon_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/icon_practice_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/icon_practice_1.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/icon_practice_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/reaper_unit_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/weapon_1.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../photoshop_stuff/새 텍스트 문서.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/anubis-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/centaur-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/chinese-dragon-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/dragon-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/griffin-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/grim-reaper-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/minotaur-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/sillhouette website.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/unicorn-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/viking-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/welsh-dragon-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/witch-silhouette.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unit/wizard-silhouette.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Point.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Point.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.New Unity Project (2)/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.New Unity Project (2)/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.New Unity Project (2)/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.New Unity Project (2)/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Tile.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Tile.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TileManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TileManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/gray_tile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/gray_tile.png.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,18 +27,55 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/TileManager.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/Resources/Scripts/TileManager.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+            <state relative-caret-position="170">
+              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
               <folding>
-                <marker date="1555160022171" expanded="false" signature="6:78" ph="..." />
-                <marker date="1555160022171" expanded="true" signature="120:1006" ph="{...}" />
-                <marker date="1555160022171" expanded="true" signature="192:621" ph="{...}" />
-                <marker date="1555160022171" expanded="true" signature="360:606" ph="{...}" />
-                <marker date="1555160022171" expanded="true" signature="411:596" ph="{...}" />
-                <marker date="1555160022171" expanded="true" signature="666:921" ph="{...}" />
-                <marker date="1555160022171" expanded="true" signature="983:1004" ph="{...}" />
+                <marker date="1555257499705" expanded="true" signature="6:103" ph="..." />
+                <marker date="1555257499705" expanded="true" signature="145:1690" ph="{...}" />
+                <marker date="1555257499705" expanded="true" signature="343:991" ph="{...}" />
+                <marker date="1555257499705" expanded="true" signature="634:943" ph="{...}" />
+                <marker date="1555257499705" expanded="true" signature="685:933" ph="{...}" />
+                <marker date="1555257499705" expanded="true" signature="1087:1601" ph="{...}" />
+                <marker date="1555257499705" expanded="true" signature="1663:1684" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Tile.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+              <folding>
+                <marker date="1555257196154" expanded="true" signature="6:43" ph="..." />
+                <marker date="1555257196154" expanded="true" signature="78:558" ph="{...}" />
+                <marker date="1555257196154" expanded="true" signature="157:232" ph="{...}" />
+                <marker date="1555257196154" expanded="true" signature="257:334" ph="{...}" />
+                <marker date="1555257196154" expanded="true" signature="361:556" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Point.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="539">
+              <caret line="52" column="9" lean-forward="true" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+              <folding>
+                <marker date="1555256546002" expanded="true" signature="42:1347" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="87:1345" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="241:328" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="352:439" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="461:544" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="566:649" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="671:754" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="795:928" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="971:1073" ph="{...}" />
+                <marker date="1555256546002" expanded="true" signature="1113:1339" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -56,29 +83,46 @@
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>_column</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2973DE33-D156-45F6-8EE5-E8520440E539/d6/c7416eca/IEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/TileManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/f7/6fc7dde5/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Tile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/59/636f94de/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Point.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/d3/e78f6b18/Resources.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/TileManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D7AC571C-A2D0-4B2F-981D-0D886FA067CF/b5/ef2b11f2/IEquatable`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2973DE33-D156-45F6-8EE5-E8520440E539/d6/c7416eca/IEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2973DE33-D156-45F6-8EE5-E8520440E539/44/112e93d1/IEquatable`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/f7/6fc7dde5/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/f9/ba08a998/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/e8/efab2417/Behaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B088006-1383-4235-AA3B-11703D6052D9/4f/1c66f9d8/GraphicRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/9e/451935c0/Component.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B088006-1383-4235-AA3B-11703D6052D9/46/c125d5fd/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/NewBehaviourScript.cs" />
         <option value="$PROJECT_DIR$/Assets/TileManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Point.cs" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Tile.cs" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Scripts/TileManager.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="169" />
-    <option name="y" value="126" />
-    <option name="width" value="1440" />
-    <option name="height" value="780" />
+    <option name="x" value="-12" />
+    <option name="y" value="-1080" />
+    <option name="width" value="1940" />
+    <option name="height" value="1193" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -86,6 +130,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="SolutionExplorer">
+        <option name="show-all-files" value="false" />
+      </pane>
       <pane id="FileSystemExplorer" />
       <pane id="UnityExplorer">
         <subPane>
@@ -93,6 +140,17 @@
             <path>
               <item name="Project" type="e068e287:UnityExplorerRootNode" />
               <item name="Assets" type="48f920db:UnityExplorerNode$AssetsRoot" />
+            </path>
+            <path>
+              <item name="Project" type="e068e287:UnityExplorerRootNode" />
+              <item name="Assets" type="48f920db:UnityExplorerNode$AssetsRoot" />
+              <item name="Resources" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="Project" type="e068e287:UnityExplorerRootNode" />
+              <item name="Assets" type="48f920db:UnityExplorerNode$AssetsRoot" />
+              <item name="Resources" type="1045f7f1:UnityExplorerNode" />
+              <item name="Scripts" type="1045f7f1:UnityExplorerNode" />
             </path>
             <path>
               <item name="Project" type="e068e287:UnityExplorerRootNode" />
@@ -115,16 +173,14 @@
         <option name="show-project-names" value="true" />
       </pane>
       <pane id="AssemblyExplorer" />
-      <pane id="SolutionExplorer">
-        <option name="show-all-files" value="false" />
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="CodeLensConfigurable" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -145,10 +201,10 @@
       <option name="pid" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="6660">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="8328">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="6660" />
+      <option name="pid" value="8328" />
       <method v="2" />
     </configuration>
   </component>
@@ -164,11 +220,12 @@
       <updated>1555144894385</updated>
       <workItem from="1555144901228" duration="1291000" />
       <workItem from="1555153148593" duration="5954000" />
+      <workItem from="1555246696256" duration="9925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7245000" />
+    <option name="totallyTimeSpent" value="17170000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -180,9 +237,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-1088" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15085287" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11247335" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -190,7 +248,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.35249457" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.35231316" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -231,13 +289,7 @@
     <entry file="file://$PROJECT_DIR$/Packages/manifest.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/NewBehaviourScript.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/NewBehaviourScript.cs" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/f7/6fc7dde5/Object.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
@@ -432,16 +484,105 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/TileManager.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="171">
           <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/f9/ba08a998/MonoBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/e8/efab2417/Behaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/78121F72-672F-4A9B-8378-F38120B3DE75/9e/451935c0/Component.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-437">
+          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B088006-1383-4235-AA3B-11703D6052D9/46/c125d5fd/EventSystem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="46" column="106" selection-start-line="46" selection-start-column="106" selection-end-line="46" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3B088006-1383-4235-AA3B-11703D6052D9/4f/1c66f9d8/GraphicRaycaster.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="176" column="55" selection-start-line="176" selection-start-column="55" selection-end-line="176" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2973DE33-D156-45F6-8EE5-E8520440E539/44/112e93d1/IEquatable`1.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D7AC571C-A2D0-4B2F-981D-0D886FA067CF/b5/ef2b11f2/IEquatable`1.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Point.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="52" column="9" lean-forward="true" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
           <folding>
-            <marker date="1555160022171" expanded="false" signature="6:78" ph="..." />
-            <marker date="1555160022171" expanded="true" signature="120:1006" ph="{...}" />
-            <marker date="1555160022171" expanded="true" signature="192:621" ph="{...}" />
-            <marker date="1555160022171" expanded="true" signature="360:606" ph="{...}" />
-            <marker date="1555160022171" expanded="true" signature="411:596" ph="{...}" />
-            <marker date="1555160022171" expanded="true" signature="666:921" ph="{...}" />
-            <marker date="1555160022171" expanded="true" signature="983:1004" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="42:1347" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="87:1345" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="241:328" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="352:439" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="461:544" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="566:649" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="671:754" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="795:928" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="971:1073" ph="{...}" />
+            <marker date="1555256546002" expanded="true" signature="1113:1339" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Tile.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <marker date="1555257196154" expanded="true" signature="6:43" ph="..." />
+            <marker date="1555257196154" expanded="true" signature="78:558" ph="{...}" />
+            <marker date="1555257196154" expanded="true" signature="157:232" ph="{...}" />
+            <marker date="1555257196154" expanded="true" signature="257:334" ph="{...}" />
+            <marker date="1555257196154" expanded="true" signature="361:556" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Resources/Scripts/TileManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding>
+            <marker date="1555257499705" expanded="true" signature="6:103" ph="..." />
+            <marker date="1555257499705" expanded="true" signature="145:1690" ph="{...}" />
+            <marker date="1555257499705" expanded="true" signature="343:991" ph="{...}" />
+            <marker date="1555257499705" expanded="true" signature="634:943" ph="{...}" />
+            <marker date="1555257499705" expanded="true" signature="685:933" ph="{...}" />
+            <marker date="1555257499705" expanded="true" signature="1087:1601" ph="{...}" />
+            <marker date="1555257499705" expanded="true" signature="1663:1684" ph="{...}" />
           </folding>
         </state>
       </provider>
