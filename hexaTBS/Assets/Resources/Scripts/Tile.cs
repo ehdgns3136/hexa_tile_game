@@ -8,7 +8,9 @@ public class Tile : MonoBehaviour
     private HexaPoint _hexaPoint;
     private CubePoint _cubePoint;
 
-    private GameObject _redTile;
+    private GameObject _highlightTile;
+
+    private List<HexaPoint> _pointsToHighlight;
 
     public float Length
     {
@@ -28,10 +30,10 @@ public class Tile : MonoBehaviour
         set { _cubePoint = value; }
     }
 
-    public GameObject RedTile
+    public GameObject HighlightTile
     {
-        get { return _redTile; }
-        set { _redTile = value; }
+        get { return _highlightTile; }
+        set { _highlightTile = value; }
     }
 
     public void OnClick()

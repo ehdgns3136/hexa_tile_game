@@ -68,7 +68,7 @@ public class TileManager : MonoSingleton<TileManager>
         _hexaTiles.Add(hexaPoint, tile);
         _cubeTiles.Add(cubePoint, tile);
         tile.Length = length;
-        tile.RedTile = tileObj.transform.Find("Select").gameObject;
+        tile.HighlightTile = tileObj.transform.Find("Select").gameObject;
     }
 
     public Tile GetTile(CubePoint point, int direction)
@@ -104,14 +104,14 @@ public class TileManager : MonoSingleton<TileManager>
             neighbors = GetNeighbors(_currentPoint);
             for (int i = 0; i < neighbors.Count; i++)
             {
-                neighbors[i].RedTile.SetActive(false);
+                neighbors[i].HighlightTile.SetActive(false);
             }
         }
 
         neighbors = GetNeighbors(point);
         for (int i = 0; i < neighbors.Count; i++)
         {
-            neighbors[i].RedTile.SetActive(true);
+            neighbors[i].HighlightTile.SetActive(true);
         }
 
         _currentPoint = point;
