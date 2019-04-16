@@ -10,6 +10,7 @@ namespace Resources.Scripts
         private float length;
         private HexaPoint hexaPoint;
         private CubePoint cubePoint;
+        private bool empty;
     
         private GameObject highlightTile;
     
@@ -44,6 +45,12 @@ namespace Resources.Scripts
         {
             get { return highlightPoints; }
             set { highlightPoints = value; }
+        }
+
+        public bool Empty
+        {
+            get { return empty; }
+            set { empty = value; }
         }
 
         public void Initialize(HexaPoint hexaPoint, CubePoint cubePoint, float length, GameObject tileObject)

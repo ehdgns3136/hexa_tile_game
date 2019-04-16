@@ -1,6 +1,6 @@
 namespace Resources.Scripts
 {
-    public class TurnManager
+    public class TurnManager : MonoWeakSingleton<TileManager>
     {
         
     }

@@ -55,5 +55,9 @@ namespace Resources.Scripts
         public static CubePoint operator+ (CubePoint p1, CubePoint p2) {
             return new CubePoint(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
         }
+        
+        public static CubePoint operator* (CubePoint p, int a) {
+            return new CubePoint(p.X * a, p.Y * a, p.Z * a);
+        }
     }
 }

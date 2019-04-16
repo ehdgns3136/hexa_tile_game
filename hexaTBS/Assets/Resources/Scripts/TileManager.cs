@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace Resources.Scripts
@@ -46,6 +48,8 @@ namespace Resources.Scripts
             {
                 for (int j = 0; j < 10; j++)
                 {
+                    if (i % 3 == 0 && (j % 7 == 0 || j % 6 == 0)) continue;
+                    
                     float xPos = xOffset * j + xOffset / 2 * (i & 1);
                     float yPos = - yOffset * i;
                     
@@ -56,7 +60,7 @@ namespace Resources.Scripts
             foreach (var cubePoint in cubeTiles.Keys)
             {
                 if (GetTile(cubePoint) != null)
-                    GetTile(cubePoint).SetHighlightPoints(GetNeighborsPoint(cubePoint));
+                    GetTile(cubePoint).SetHighlightPoints(GetPointsBetweenRange(cubePoint, 2));
             }
         }
     
@@ -89,36 +93,35 @@ namespace Resources.Scripts
             return null;
         }
     
-        
-        // TODO : Experimental logic, need to remove after a while from here
-        public List<Tile> GetNeighbors(CubePoint point)
+        public List<CubePoint> GetPointsAtRange(CubePoint point, int range)
         {
-            List<Tile> neighbors = new List<Tile>();
+            List<CubePoint> points = new List<CubePoint>();
+            CubePoint targetPoint = point + directionOffsets[4] * range;
             for (int i = 0; i < 6; i++)
             {
-                Tile neighbor = GetTile(point, i);
-                if (neighbor != null)
-                    neighbors.Add(neighbor);
+                for (int j = 0; j < range; j++)
+                {
+                    targetPoint = targetPoint + directionOffsets[i];
+                    if (!cubeTiles.ContainsKey(targetPoint))
+                        continue;
+                    
+                    points.Add(targetPoint);
+                }
             }
     
-            return neighbors;
+            return points;
         }
-    
-        public List<CubePoint> GetNeighborsPoint(CubePoint point)
+
+        public List<CubePoint> GetPointsBetweenRange(CubePoint point, int range)
         {
-            List<CubePoint> neighborsPoint = new List<CubePoint>();
-            for (int i = 0; i < 6; i++)
+            List<CubePoint> points = new List<CubePoint>();
+            for (int i = 1; i <= range; i++)
             {
-                CubePoint targetPoint = point + directionOffsets[i];
-                if (!cubeTiles.ContainsKey(targetPoint))
-                    continue;
-                
-                neighborsPoint.Add(targetPoint);
+                points.InsertRange(points.Count == 0 ? 0 : points.Count - 1, GetPointsAtRange(point, i));
             }
-    
-            return neighborsPoint;
+
+            return points;
         }
-        // TODO : To here
 
         public void HighlightTiles(List<CubePoint> points, bool activate)
         {
