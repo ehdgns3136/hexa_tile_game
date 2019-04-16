@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\ehdgn\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\ehdgn\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_New Unity Project (2).-504404491.00" t="ExcludeRecursive" />
-    <e p="C:\Users\ehdgn\Desktop\Donghoon Kim\new_game\hexa_tile_game\New Unity Project (2)" t="IncludeRecursive">
+    <e p="C:\Users\ehdgn\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_hexaTBS.-1653828071.00" t="ExcludeRecursive" />
+    <e p="C:\Users\ehdgn\Desktop\Donghoon Kim\new_game\hexa_tile_game\hexaTBS" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Resources" t="Include">
@@ -11,13 +11,14 @@
             <e p="CubePoint.cs" t="Include" />
             <e p="HexaPoint.cs" t="Include" />
             <e p="MonoSingleton.cs" t="Include" />
+            <e p="MonoWeakSingleton.cs" t="Include" />
             <e p="Tile.cs" t="Include" />
             <e p="TileManager.cs" t="Include" />
           </e>
         </e>
       </e>
+      <e p="hexaTBS.sln" t="IncludeFlat" />
       <e p="Library" t="ExcludeRecursive" />
-      <e p="New Unity Project (2).sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Temp" t="ExcludeRecursive">

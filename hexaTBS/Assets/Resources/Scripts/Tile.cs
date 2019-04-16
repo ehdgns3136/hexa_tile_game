@@ -34,11 +34,6 @@ public class Tile : MonoBehaviour
         set { _redTile = value; }
     }
 
-//    public Tile()
-//    {
-//        RedTile = transform.Find("Select").gameObject;
-//    }
-
     public void OnClick()
     {
         // why there is no on click
