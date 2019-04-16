@@ -4,19 +4,19 @@ namespace Resources.Scripts
 {
     public class HexaPoint : IEquatable<HexaPoint>
     {
-        private int _row;
-        private int _col;
+        private int row;
+        private int col;
 
         public int Row
         {
-            get { return _row; }
-            set { _row = value; }
+            get { return row; }
+            set { row = value; }
         }
 
         public int Col
         {
-            get { return _col; }
-            set { _col = value; }
+            get { return col; }
+            set { col = value; }
         }
 
         public bool Equals(HexaPoint point)

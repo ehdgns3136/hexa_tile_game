@@ -4,26 +4,26 @@ namespace Resources.Scripts
 {
     public class CubePoint : IEquatable<CubePoint>
     {
-        private int _x;
-        private int _y;
-        private int _z;
+        private int x;
+        private int y;
+        private int z;
 
         public int X
         {
-            get { return _x; }
-            set { _x = value; }
+            get { return x; }
+            set { x = value; }
         }
 
         public int Y
         {
-            get { return _y; }
-            set { _y = value; }
+            get { return y; }
+            set { y = value; }
         }
 
         public int Z
         {
-            get { return _z; }
-            set { _z = value; }
+            get { return z; }
+            set { z = value; }
         }
         
         public bool Equals(CubePoint point)
@@ -40,13 +40,9 @@ namespace Resources.Scripts
 
         public CubePoint(int row, int col)
         {
-            int x = col - (row - (row & 1)) / 2;
-            int z = row;
-            int y = -x - z;
-
-            X = x;
-            Y = y;
-            Z = z;
+            X = col - (row - (row & 1)) / 2;
+            Y = row;
+            Z = -X - Y;
         }
 
         public CubePoint(int x, int y, int z)

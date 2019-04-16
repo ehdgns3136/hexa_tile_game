@@ -12,6 +12,7 @@
             <e p="HexaPoint.cs" t="Include" />
             <e p="Tile.cs" t="Include" />
             <e p="TileManager.cs" t="Include" />
+            <e p="TurnManager.cs" t="Include" />
             <e p="Utils" t="Include">
               <e p="MonoSingleton.cs" t="Include" />
               <e p="MonoWeakSingleton.cs" t="Include" />

@@ -2,47 +2,70 @@
 using UnityEngine;
 using Resources.Scripts;
 
-public class Tile : MonoBehaviour
+namespace Resources.Scripts
 {
-    private float _length;
-    private HexaPoint _hexaPoint;
-    private CubePoint _cubePoint;
-
-    private GameObject _highlightTile;
-
-    private List<HexaPoint> _pointsToHighlight;
-
-    public float Length
+    
+    public class Tile : MonoBehaviour
     {
-        get { return _length; }
-        set { _length = value; }
-    }
+        private float length;
+        private HexaPoint hexaPoint;
+        private CubePoint cubePoint;
+    
+        private GameObject highlightTile;
+    
+        private List<CubePoint> highlightPoints;
+        // object unit which on current tile
+    
+        public float Length
+        {
+            get { return length; }
+            set { length = value; }
+        }
+    
+        public HexaPoint HexaPoint
+        {
+            get { return hexaPoint; }
+            set { hexaPoint = value; }
+        }
+    
+        public CubePoint CubePoint
+        {
+            get { return cubePoint; }
+            set { cubePoint = value; }
+        }
+    
+        public GameObject HighlightTile
+        {
+            get { return highlightTile; }
+            set { highlightTile = value; }
+        }
 
-    public HexaPoint HexaPoint
-    {
-        get { return _hexaPoint; }
-        set { _hexaPoint = value; }
-    }
+        public List<CubePoint> HighlightPoints
+        {
+            get { return highlightPoints; }
+            set { highlightPoints = value; }
+        }
 
-    public CubePoint CubePoint
-    {
-        get { return _cubePoint; }
-        set { _cubePoint = value; }
-    }
+        public void Initialize(HexaPoint hexaPoint, CubePoint cubePoint, float length, GameObject tileObject)
+        {
+            HexaPoint = hexaPoint;
+            CubePoint = cubePoint;
+            Length = length;
+            HighlightTile = tileObject;
+        }
+    
+        public void OnClick()
+        {
+            Debug.Log("Row, Col : " + HexaPoint.Row + ", " + HexaPoint.Col);
+            Debug.Log("X, Y, Z : " + CubePoint.X + ", " + CubePoint.Y + ", " + CubePoint.Z);
 
-    public GameObject HighlightTile
-    {
-        get { return _highlightTile; }
-        set { _highlightTile = value; }
-    }
+            TileManager.Instance.SelectNewPoint(cubePoint);
 
-    public void OnClick()
-    {
-        // why there is no on click
-        Debug.Log("Row, Col : " + HexaPoint.Row + ", " + HexaPoint.Col);
-        Debug.Log("X, Y, Z : " + CubePoint.X + ", " + CubePoint.Y + ", " + CubePoint.Z);
-        
-        TileManager.Instance.HighlightNeighbor(CubePoint);
-        
+        }
+
+        public void SetHighlightPoints(List<CubePoint> points)
+        {
+            highlightPoints = points;
+        }
     }
 }

@@ -1,119 +1,148 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Resources.Scripts;
 using UnityEngine;
 
-public class TileManager : MonoSingleton<TileManager>
+namespace Resources.Scripts
 {
-    private Dictionary<CubePoint, Tile> _cubeTiles;
-    private Dictionary<HexaPoint, Tile> _hexaTiles;
-
-    private static readonly float startXOffset = -10f;
-    private static readonly float startYOffset = 8f;
-
-    private static readonly CubePoint[] directionOffsets =
+    public class TileManager : MonoWeakSingleton<TileManager>
     {
-        new CubePoint(1, -1, 0),
-        new CubePoint(1, 0, -1),
-        new CubePoint(0, 1, -1),
-        new CubePoint(-1, 1, 0),
-        new CubePoint(-1, 0, 1),
-        new CubePoint(0, -1, 1)
-    };
-
-    private CubePoint _currentPoint;
-
-    private void Initialize()
-    {
-        _cubeTiles = new Dictionary<CubePoint, Tile>();
-        _hexaTiles = new Dictionary<HexaPoint, Tile>();
-        _currentPoint = null;
-    }
+        private Dictionary<CubePoint, Tile> cubeTiles;
+        private Dictionary<HexaPoint, Tile> hexaTiles;
     
-    protected void Start()
-    {
-        Initialize();
-        
-        GameObject canvasObj = GameObject.Find("Canvas");
-        
-        float length = 1f;
-        float xOffset = length * Mathf.Sqrt(3);
-        float yOffset = length * 3 / 2;
-        
-        for (int i = 0; i < 10; i++)
+        private static readonly float startXOffset = -10f;
+        private static readonly float startYOffset = 8f;
+    
+        private static readonly CubePoint[] directionOffsets =
         {
-            for (int j = 0; j < 10; j++)
+            new CubePoint(1, -1, 0),
+            new CubePoint(1, 0, -1),
+            new CubePoint(0, 1, -1),
+            new CubePoint(-1, 1, 0),
+            new CubePoint(-1, 0, 1),
+            new CubePoint(0, -1, 1)
+        };
+    
+        private CubePoint currentPoint;
+        private List<CubePoint> currentHighlightPoints;
+
+        private void Initialize()
+        {
+            cubeTiles = new Dictionary<CubePoint, Tile>();
+            hexaTiles = new Dictionary<HexaPoint, Tile>();
+            currentPoint = null;
+        }
+        
+        protected void Start()
+        {
+            Initialize();
+            
+            GameObject canvasObj = GameObject.Find("Canvas");
+            
+            float length = 1f;
+            float xOffset = length * Mathf.Sqrt(3);
+            float yOffset = length * 3 / 2;
+            
+            for (int i = 0; i < 10; i++)
             {
-                float xPos = xOffset * j + xOffset / 2 * (i & 1);
-                float yPos = - yOffset * i;
-                
-                LoadTile(startXOffset + xPos, startYOffset + yPos, i, j, length, canvasObj);
+                for (int j = 0; j < 10; j++)
+                {
+                    float xPos = xOffset * j + xOffset / 2 * (i & 1);
+                    float yPos = - yOffset * i;
+                    
+                    LoadTile(startXOffset + xPos, startYOffset + yPos, i, j, length, canvasObj);
+                }
+            }
+            
+            foreach (var cubePoint in cubeTiles.Keys)
+            {
+                if (GetTile(cubePoint) != null)
+                    GetTile(cubePoint).SetHighlightPoints(GetNeighborsPoint(cubePoint));
             }
         }
-    }
+    
+        private void LoadTile(float x, float y, int row, int col, float length, GameObject canvas)
+        {
+            Object tilePrefab = UnityEngine.Resources.Load("Prefabs/Tile"); // note: not .prefab!
+            GameObject tileObj = (GameObject) GameObject.Instantiate(tilePrefab, Vector3.zero, Quaternion.identity);
+            tileObj.transform.position = new Vector3(x, y);
+            tileObj.transform.SetParent(canvas.transform);
+            
+            HexaPoint hexaPoint = new HexaPoint(row, col);
+            CubePoint cubePoint = new CubePoint(row, col);
+            
+            var tile = tileObj.GetComponent<Tile>();
+            tile.Initialize(hexaPoint, cubePoint, length, tileObj.transform.Find("Select").gameObject);
+            hexaTiles.Add(hexaPoint, tile);
+            cubeTiles.Add(cubePoint, tile);
+        }
+    
+        public Tile GetTile(CubePoint point, int direction)
+        {
+            CubePoint targetPoint = point + directionOffsets[direction];
+            return GetTile(targetPoint) != null ? GetTile(targetPoint) : null;
+        }
 
-    private void LoadTile(float x, float y, int row, int col, float length, GameObject canvas)
-    {
-        Object tilePrefab = UnityEngine.Resources.Load("Prefabs/Tile"); // note: not .prefab!
-        GameObject tileObj = (GameObject) GameObject.Instantiate(tilePrefab, Vector3.zero, Quaternion.identity);
-        tileObj.transform.position = new Vector3(x, y);
-        tileObj.transform.SetParent(canvas.transform);
-        
-        HexaPoint hexaPoint = new HexaPoint(row, col);
-        CubePoint cubePoint = new CubePoint(row, col);
-        
-        var tile = tileObj.GetComponent<Tile>();
-        tile.HexaPoint = hexaPoint;
-        tile.CubePoint = cubePoint;
-        _hexaTiles.Add(hexaPoint, tile);
-        _cubeTiles.Add(cubePoint, tile);
-        tile.Length = length;
-        tile.HighlightTile = tileObj.transform.Find("Select").gameObject;
-    }
-
-    public Tile GetTile(CubePoint point, int direction)
-    {
-        CubePoint targetPoint = point + directionOffsets[direction];
-        if (!_cubeTiles.ContainsKey(targetPoint))
+        public Tile GetTile(CubePoint point)
+        {
+            if (cubeTiles.ContainsKey(point))
+                return cubeTiles[point];
             return null;
-
-        return _cubeTiles[targetPoint];
-    }
-
-    public List<Tile> GetNeighbors(CubePoint point)
-    {
-        List<Tile> neighbors = new List<Tile>();
-        for (int i = 0; i < 6; i++)
-        {
-            Tile neighbor = GetTile(point, i);
-            if (neighbor != null)
-                neighbors.Add(neighbor);
         }
-
-        return neighbors;
-    }
-
-    public void HighlightNeighbor(CubePoint point)
-    {
-        if (point == _currentPoint)
-            return;
+    
         
-        List<Tile> neighbors;
-        if (_currentPoint != null)
+        // TODO : Experimental logic, need to remove after a while from here
+        public List<Tile> GetNeighbors(CubePoint point)
         {
-            neighbors = GetNeighbors(_currentPoint);
-            for (int i = 0; i < neighbors.Count; i++)
+            List<Tile> neighbors = new List<Tile>();
+            for (int i = 0; i < 6; i++)
             {
-                neighbors[i].HighlightTile.SetActive(false);
+                Tile neighbor = GetTile(point, i);
+                if (neighbor != null)
+                    neighbors.Add(neighbor);
+            }
+    
+            return neighbors;
+        }
+    
+        public List<CubePoint> GetNeighborsPoint(CubePoint point)
+        {
+            List<CubePoint> neighborsPoint = new List<CubePoint>();
+            for (int i = 0; i < 6; i++)
+            {
+                CubePoint targetPoint = point + directionOffsets[i];
+                if (!cubeTiles.ContainsKey(targetPoint))
+                    continue;
+                
+                neighborsPoint.Add(targetPoint);
+            }
+    
+            return neighborsPoint;
+        }
+        // TODO : To here
+
+        public void HighlightTiles(List<CubePoint> points, bool activate)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (GetTile(points[i]) != null)
+                {
+                    GetTile(points[i]).HighlightTile.SetActive(activate);
+                }
             }
         }
 
-        neighbors = GetNeighbors(point);
-        for (int i = 0; i < neighbors.Count; i++)
+        public void SelectNewPoint(CubePoint point)
         {
-            neighbors[i].HighlightTile.SetActive(true);
-        }
+            if (point == currentPoint)
+                return;
 
-        _currentPoint = point;
+            if (currentHighlightPoints != null && currentHighlightPoints.Count > 0)
+                HighlightTiles(currentHighlightPoints, false);
+
+            currentPoint = point;
+            currentHighlightPoints = GetTile(currentPoint).HighlightPoints;
+            HighlightTiles(currentHighlightPoints, true);
+        }
     }
 }
+

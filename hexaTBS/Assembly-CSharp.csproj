@@ -67,6 +67,7 @@
     <Compile Include="Assets\Resources\Scripts\HexaPoint.cs" />
     <Compile Include="Assets\Resources\Scripts\Tile.cs" />
     <Compile Include="Assets\Resources\Scripts\TileManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\TurnManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoSingleton.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoWeakSingleton.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
