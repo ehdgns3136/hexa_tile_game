@@ -123,13 +123,13 @@ namespace Resources.Scripts
             return points;
         }
 
-        public void HighlightTiles(List<CubePoint> points, bool activate)
+        public void HighlightTiles(List<CubePoint> points, bool active)
         {
             for (int i = 0; i < points.Count; i++)
             {
                 if (GetTile(points[i]) != null)
                 {
-                    GetTile(points[i]).HighlightTile.SetActive(activate);
+                    GetTile(points[i]).HighlightTile.SetActive(active);
                 }
             }
         }

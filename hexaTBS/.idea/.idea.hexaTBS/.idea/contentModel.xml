@@ -16,6 +16,7 @@
             <e p="Utils" t="Include">
               <e p="MonoSingleton.cs" t="Include" />
               <e p="MonoWeakSingleton.cs" t="Include" />
+              <e p="PriorityQueue.cs" t="Include" />
             </e>
           </e>
         </e>
