@@ -60,7 +60,7 @@ namespace Resources.Scripts
             foreach (var cubePoint in cubeTiles.Keys)
             {
                 if (GetTile(cubePoint) != null)
-                    GetTile(cubePoint).SetHighlightPoints(GetPointsBetweenRange(cubePoint, 2));
+                    GetTile(cubePoint).SetHighlightPoints(GetPointsWithinRadius(cubePoint, 2));
             }
         }
     
@@ -112,10 +112,10 @@ namespace Resources.Scripts
             return points;
         }
 
-        public List<CubePoint> GetPointsBetweenRange(CubePoint point, int range)
+        public List<CubePoint> GetPointsWithinRadius(CubePoint point, int radius)
         {
             List<CubePoint> points = new List<CubePoint>();
-            for (int i = 1; i <= range; i++)
+            for (int i = 1; i <= radius; i++)
             {
                 points.InsertRange(points.Count == 0 ? 0 : points.Count - 1, GetPointsAtRange(point, i));
             }

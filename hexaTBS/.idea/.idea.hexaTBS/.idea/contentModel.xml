@@ -2,17 +2,21 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\ehdgn\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\ehdgn\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_hexaTBS.-1653828071.00" t="ExcludeRecursive" />
-    <e p="C:\Users\ehdgn\Desktop\Donghoon Kim\new_game\hexa_tile_game\hexaTBS" t="IncludeRecursive">
+    <e p="C:\Users\ehdgn\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_hexaTBS.1538580210.00" t="ExcludeRecursive" />
+    <e p="C:\Users\ehdgn\hexaTBS\hexaTBS" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Resources" t="Include">
           <e p="Scripts" t="Include">
+            <e p="Board.cs" t="Include" />
+            <e p="BoardManager.cs" t="Include" />
+            <e p="Building.cs" t="Include" />
             <e p="CubePoint.cs" t="Include" />
+            <e p="GameManager.cs" t="Include" />
             <e p="HexaPoint.cs" t="Include" />
             <e p="Tile.cs" t="Include" />
             <e p="TileManager.cs" t="Include" />
-            <e p="TurnManager.cs" t="Include" />
+            <e p="Unit.cs" t="Include" />
             <e p="Utils" t="Include">
               <e p="MonoSingleton.cs" t="Include" />
               <e p="MonoWeakSingleton.cs" t="Include" />

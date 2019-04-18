@@ -64,11 +64,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\Scripts\Board.cs" />
+    <Compile Include="Assets\Resources\Scripts\BoardManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Building.cs" />
     <Compile Include="Assets\Resources\Scripts\CubePoint.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
     <Compile Include="Assets\Resources\Scripts\HexaPoint.cs" />
     <Compile Include="Assets\Resources\Scripts\Tile.cs" />
     <Compile Include="Assets\Resources\Scripts\TileManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\TurnManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Unit.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoSingleton.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoWeakSingleton.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\PriorityQueue.cs" />
