@@ -71,7 +71,6 @@
     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
     <Compile Include="Assets\Resources\Scripts\HexaPoint.cs" />
     <Compile Include="Assets\Resources\Scripts\Tile.cs" />
-    <Compile Include="Assets\Resources\Scripts\TileManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Unit.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoSingleton.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoWeakSingleton.cs" />

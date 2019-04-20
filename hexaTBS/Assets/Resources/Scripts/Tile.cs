@@ -66,7 +66,7 @@ namespace Resources.Scripts
             Debug.Log("Row, Col : " + HexaPoint.Row + ", " + HexaPoint.Col);
             Debug.Log("X, Y, Z : " + CubePoint.X + ", " + CubePoint.Y + ", " + CubePoint.Z);
 
-            TileManager.Instance.SelectNewPoint(cubePoint);
+            BoardManager.Instance.SelectNewPoint(cubePoint);
 
         }
 
