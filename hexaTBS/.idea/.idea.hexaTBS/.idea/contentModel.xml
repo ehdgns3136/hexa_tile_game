@@ -10,7 +10,6 @@
           <e p="Scripts" t="Include">
             <e p="Board.cs" t="Include" />
             <e p="BoardManager.cs" t="Include" />
-            <e p="Building.cs" t="Include" />
             <e p="CubePoint.cs" t="Include" />
             <e p="GameManager.cs" t="Include" />
             <e p="HexaPoint.cs" t="Include" />
