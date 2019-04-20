@@ -4,60 +4,57 @@ namespace Resources.Scripts
 {
     public class CubePoint : IEquatable<CubePoint>
     {
-        private int x;
-        private int y;
-        private int z;
-
-        public int X
-        {
-            get { return x; }
-            set { x = value; }
-        }
-
-        public int Y
-        {
-            get { return y; }
-            set { y = value; }
-        }
-
-        public int Z
-        {
-            get { return z; }
-            set { z = value; }
-        }
+        private readonly int x;
+        private readonly int y;
+        private readonly int z;
         
         public bool Equals(CubePoint point)
         {
             if (point == null) return false;
-            return X == point.X && Y == point.Y && Z == point.Z;
+            return x == point.GetX() && y == point.GetY() && z == point.GetZ();
         }
 
         public override int GetHashCode()
         {
-            string hash = X + "|" + Y + "|" + Z;
+            string hash = x + "|" + y + "|" + z;
             return hash.GetHashCode();
         }
 
-        public CubePoint(int row, int col)
+        public CubePoint(int row, int column)
         {
-            X = col - (row - (row & 1)) / 2;
-            Y = row;
-            Z = -X - Y;
+            x = column - (row - (row & 1)) / 2;
+            y = row;
+            z = -x - y;
         }
 
         public CubePoint(int x, int y, int z)
         {
-            X = x;
-            Y = y;
-            Z = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
         
         public static CubePoint operator+ (CubePoint p1, CubePoint p2) {
-            return new CubePoint(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
+            return new CubePoint(p1.GetX() + p2.GetX(), p1.GetY() + p2.GetY(), p1.GetZ() + p2.GetZ());
         }
         
         public static CubePoint operator* (CubePoint p, int a) {
-            return new CubePoint(p.X * a, p.Y * a, p.Z * a);
+            return new CubePoint(p.GetX() * a, p.GetY() * a, p.GetZ() * a);
+        }
+
+        public int GetX()
+        {
+            return x;
+        }
+        
+        public int GetY()
+        {
+            return y;
+        }
+        
+        public int GetZ()
+        {
+            return z;
         }
     }
 }

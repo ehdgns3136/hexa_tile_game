@@ -19,7 +19,7 @@ namespace Resources.Scripts
         {
             cubeCoordinates = new Dictionary<CubePoint, Tile>();
             hexaCoordinates = new Dictionary<HexaPoint, Tile>();
-            this.startXOffset = startYOffset;
+            this.startXOffset = startXOffset;
             this.startYOffset = startYOffset;
             this.canvasObj = canvasObj;
             
@@ -29,6 +29,7 @@ namespace Resources.Scripts
         private void LoadTiles()
         {
             tilePrefab = UnityEngine.Resources.Load("Prefabs/Tile"); // note: not .prefab!
+            // load from map file later made by kinda map tool
             
             float length = 1f; // one side length of hexagon
             float xOffset = length * Mathf.Sqrt(3);
