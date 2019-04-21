@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace Resources.Scripts
 {
-    public class Resource
+    public class Resource : MonoBehaviour
     {
         
     }

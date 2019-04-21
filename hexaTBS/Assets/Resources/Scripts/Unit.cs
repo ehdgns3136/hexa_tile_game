@@ -1,29 +1,52 @@
+using UnityEngine;
+
 namespace Resources.Scripts
 {
-    public class Unit
+    public class Unit : MonoBehaviour
     {
-        private int hp;
-        private int offense;
-        private int defense;
-        private int movement;
-        private int sight;
-        private UnitType type;
+        private int _hp;
+        private int _offense;
+        private int _defense;
+        private int _movement;
+        private int _sight;
+        private UnitType _type;
+        
+        private Tile.TileType _movableTileType;
+        private int _leftMovement;
         
         public enum UnitType
         {
-            NONE,
+            NONE, // for default
             HUMAN,
             BUILDING
         }
 
-        public Unit(int hp, int offense, int defense, int movement, int sight, UnitType type)
+        public void Initialize(int hp, int offense, int defense, int movement, int sight, UnitType type)
         {
-            this.hp = hp;
-            this.offense = offense;
-            this.defense = defense;
-            this.movement = movement;
-            this.sight = sight;
-            this.type = type;
+            _hp = hp;
+            _offense = offense;
+            _defense = defense;
+            _movement = movement;
+            _sight = sight;
+            _type = type;
+            
+            _movableTileType = Tile.TileType.LOWABLE;
+            _leftMovement = _movement;
+        }
+
+        public int GetLeftMovement()
+        {
+            return _leftMovement;
+        }
+
+        public int GetMovement()
+        {
+            return _movement;
+        }
+
+        public Tile.TileType GetMovableTileType()
+        {
+            return _movableTileType;
         }
     }
 }

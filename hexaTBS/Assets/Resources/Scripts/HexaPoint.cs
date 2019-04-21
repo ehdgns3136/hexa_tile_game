@@ -4,35 +4,35 @@ namespace Resources.Scripts
 {
     public class HexaPoint : IEquatable<HexaPoint>
     {
-        private readonly int row;
-        private readonly int column;
+        private readonly int _row;
+        private readonly int _column;
 
         public bool Equals(HexaPoint point)
         {
             if (point == null) return false;
-            return row == point.GetRow() && column == point.GetColumn();
+            return _row == point.GetRow() && _column == point.GetColumn();
         }
 
         public override int GetHashCode()
         {
-            string hash = row + "|" + column;
+            string hash = _row + "|" + _column;
             return hash.GetHashCode();
         }
 
         public HexaPoint(int row, int column)
         {
-            this.row = row;
-            this.column = column;
+            _row = row;
+            _column = column;
         }
 
         public int GetRow()
         {
-            return row;
+            return _row;
         }
 
         public int GetColumn()
         {
-            return column;
+            return _column;
         }
     }
 }

@@ -7,38 +7,86 @@ namespace Resources.Scripts
     
     public class Tile : MonoBehaviour
     {
-        private float length;
-        private HexaPoint hexaPoint;
-        private CubePoint cubePoint;
+        private float _length;
+        private HexaPoint _hexaPoint;
+        private CubePoint _cubePoint;
     
-        private GameObject highlightTile;
+        private GameObject _highlightTile;
     
-        private List<CubePoint> highlightPoints;
+        private List<CubePoint> _reachablePoints;
 
-        private Unit unit;
-        private Building building;
-        private Resource resource;
+        private Unit _unit;
+        private Resource _resource;
 
-        public void Initialize(HexaPoint hexaPoint, CubePoint cubePoint, float length, GameObject tileObject)
+        private Color _color;
+
+        public enum TileType
         {
-            this.hexaPoint = hexaPoint;
-            this.cubePoint = cubePoint;
-            this.length = length;
-            this.highlightTile = tileObject;
+            DEFAULT = 0x0001,
+            LOW = 0x0010,
+            LOWABLE = 0x0011,
+            HIGH = 0x0100,
+            HIGHABLE = 0x0101,
+            EVERYWHERE = 0x0111
         }
+
+        private TileType _type;
+//        private Sprite _sprite;
+
+
+        public void Initialize(HexaPoint hexaPoint, CubePoint cubePoint, float length)
+        {
+            _hexaPoint = hexaPoint;
+            _cubePoint = cubePoint;
+            _length = length;
+            _highlightTile = transform.Find("Select").gameObject;
+            
+            _unit = null;
+            _resource = null;
+            
+            BoardManager.Instance.UpdateReachablePoints(this);
+        }
+        
     
         public void OnClick()
         {
-            Debug.Log("Row, Col : " + hexaPoint.GetRow() + ", " + hexaPoint.GetColumn());
-            Debug.Log("X, Y, Z : " + cubePoint.GetX() + ", " + cubePoint.GetY() + ", " + cubePoint.GetZ());
+            Debug.Log(_unit);
+
+//            Debug.Log("Row, Col : " + hexaPoint.GetRow() + ", " + hexaPoint.GetColumn());
+//            Debug.Log("X, Y, Z : " + cubePoint.GetX() + ", " + cubePoint.GetY() + ", " + cubePoint.GetZ());
 
 //            BoardManager.Instance.SelectNewPoint(cubePoint);
 
         }
 
-        public void SetHighlightPoints(List<CubePoint> points)
+        public void SetReachablePoints(List<CubePoint> points)
         {
-            highlightPoints = points;
+            _reachablePoints = points;
+        }
+
+        public void SetUnit(Unit unit)
+        {
+            _unit = unit;
+        }
+
+        public Unit GetUnit()
+        {
+            return _unit;
+        }
+
+        public CubePoint GetCubePoint()
+        {
+            return _cubePoint;
+        }
+        
+        public HexaPoint GetHexaPoint()
+        {
+            return _hexaPoint;
+        }
+
+        public TileType GetTileType()
+        {
+            return _type;
         }
     }
 }

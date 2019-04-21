@@ -6,29 +6,29 @@ namespace Resources.Scripts
 {
     public class Board
     {
-        private float startXOffset;
-        private float startYOffset;
+        private float _startXOffset;
+        private float _startYOffset;
         
-        private Dictionary<CubePoint, Tile> cubeCoordinates;
-        private Dictionary<HexaPoint, Tile> hexaCoordinates;
+        private Dictionary<CubePoint, Tile> _cubeCoordinates;
+        private Dictionary<HexaPoint, Tile> _hexaCoordinates;
         
-        private GameObject canvasObj;
-        private Object tilePrefab;
+        private GameObject _canvasObj;
+        private Object _tilePrefab;
 
         public void Initialize(float startXOffset, float startYOffset, GameObject canvasObj)
         {
-            cubeCoordinates = new Dictionary<CubePoint, Tile>();
-            hexaCoordinates = new Dictionary<HexaPoint, Tile>();
-            this.startXOffset = startXOffset;
-            this.startYOffset = startYOffset;
-            this.canvasObj = canvasObj;
+            _cubeCoordinates = new Dictionary<CubePoint, Tile>();
+            _hexaCoordinates = new Dictionary<HexaPoint, Tile>();
+            _startXOffset = startXOffset;
+            _startYOffset = startYOffset;
+            _canvasObj = canvasObj;
             
             LoadTiles();
         }
 
         private void LoadTiles()
         {
-            tilePrefab = UnityEngine.Resources.Load("Prefabs/Tile"); // note: not .prefab!
+            _tilePrefab = UnityEngine.Resources.Load("Prefabs/Tile"); // note: not .prefab!
             // load from map file later made by kinda map tool
             
             float length = 1f; // one side length of hexagon
@@ -44,7 +44,7 @@ namespace Resources.Scripts
                     float xPos = xOffset * j + xOffset / 2 * (i & 1);
                     float yPos = - yOffset * i;
                     
-                    LoadTile(startXOffset + xPos, startYOffset + yPos, i, j, length);
+                    LoadTile(_startXOffset + xPos, _startYOffset + yPos, i, j, length);
                 }
             }
 
@@ -55,64 +55,82 @@ namespace Resources.Scripts
 //            }
         }
         
-        private void LoadTile(float x, float y, int row, int col, float length)
+        private void LoadTile(float x, float y, int row, int column, float length)
         {   
-            GameObject tileObj = (GameObject) GameObject.Instantiate(tilePrefab, Vector3.zero, Quaternion.identity);
+            GameObject tileObj = (GameObject) GameObject.Instantiate(_tilePrefab, Vector3.zero, Quaternion.identity);
             tileObj.transform.position = new Vector3(x, y);
-            tileObj.transform.SetParent(canvasObj.transform);
+            tileObj.transform.SetParent(_canvasObj.transform);
             
-            HexaPoint hexaPoint = new HexaPoint(row, col);
-            CubePoint cubePoint = new CubePoint(row, col);
+            HexaPoint hexaPoint = new HexaPoint(row, column);
+            CubePoint cubePoint = new CubePoint(row, column);
             
-            var tile = tileObj.GetComponent<Tile>();
-            tile.Initialize(hexaPoint, cubePoint, length, tileObj.transform.Find("Select").gameObject);
-            hexaCoordinates.Add(hexaPoint, tile);
-            cubeCoordinates.Add(cubePoint, tile);
+            Tile tile = tileObj.GetComponent<Tile>();
+            tile.Initialize(hexaPoint, cubePoint, length);
+            LoadUnit(x, y, row, column, tile);
+            
+            _hexaCoordinates.Add(hexaPoint, tile);
+            _cubeCoordinates.Add(cubePoint, tile);
+        }
+
+        private void LoadUnit(float x, float y, int row, int column, Tile tile)
+        {
+            if (row == 1 && column == 1)
+            {
+                Object unitPrefab = UnityEngine.Resources.Load("Prefabs/Unit"); // note: not .prefab!
+                
+                GameObject unitObj = (GameObject) GameObject.Instantiate(unitPrefab, Vector3.zero, Quaternion.identity);
+                unitObj.transform.position = new Vector3(x, y);
+                unitObj.transform.SetParent(_canvasObj.transform);
+                
+                Unit unit = unitObj.GetComponent<Unit>();
+                unit.Initialize(10, 3, 1, 3, 2, Unit.UnitType.HUMAN);
+                tile.SetUnit(unit);
+            }
         }
 
         public void AddToCoordinate(CubePoint cubePoint, Tile tile)
         {
-            cubeCoordinates.Add(cubePoint, tile);
+            _cubeCoordinates.Add(cubePoint, tile);
         }
         
         public void AddToCoordinate(HexaPoint cubePoint, Tile tile)
         {
-            hexaCoordinates.Add(cubePoint, tile);
+            _hexaCoordinates.Add(cubePoint, tile);
         }
 
         public Tile GetTile(CubePoint cubePoint)
         {
-            if (!cubeCoordinates.ContainsKey(cubePoint))
+            if (!_cubeCoordinates.ContainsKey(cubePoint))
                 return null;
-            return cubeCoordinates[cubePoint];
+            return _cubeCoordinates[cubePoint];
         }
         
         public Tile GetTile(HexaPoint hexaPoint)
         {
-            if (!hexaCoordinates.ContainsKey(hexaPoint))
+            if (!_hexaCoordinates.ContainsKey(hexaPoint))
                 return null;
             
-            return hexaCoordinates[hexaPoint];
+            return _hexaCoordinates[hexaPoint];
         }
 
         public List<CubePoint> GetCubePoints()
         {
-            return cubeCoordinates.Keys.ToList();
+            return _cubeCoordinates.Keys.ToList();
         }
 
         public List<HexaPoint> GetHexaPoints()
         {
-            return hexaCoordinates.Keys.ToList();
+            return _hexaCoordinates.Keys.ToList();
         }
 
         public bool ContainsPoint(CubePoint cubePoint)
         {
-            return cubeCoordinates.ContainsKey(cubePoint);
+            return _cubeCoordinates.ContainsKey(cubePoint);
         }
         
         public bool ContainsPoint(HexaPoint hexaPoint)
         {
-            return hexaCoordinates.ContainsKey(hexaPoint);
+            return _hexaCoordinates.ContainsKey(hexaPoint);
         }
     }
 }

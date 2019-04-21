@@ -8,20 +8,28 @@ namespace Resources.Scripts
         private static readonly float startXOffset = -10f;
         private static readonly float startYOffset = 8f;
 
-        private static GameObject canvasObj;
+        private static GameObject _canvasObj;
     
-        private Board board;
+        private Board _board;
         
-        private CubePoint currentPoint;
-        private List<CubePoint> currentHighlightPoints;
+        private CubePoint _currentPoint;
+        private List<CubePoint> _currentHighlightPoints;
 
         protected void Start()
         {
-            currentPoint = null;
-            canvasObj = GameObject.Find("Canvas");
+            _currentPoint = null;
+            _canvasObj = GameObject.Find("Canvas");
             
-            board = new Board();
-            board.Initialize(startXOffset, startYOffset, canvasObj);
+            _board = new Board();
+            _board.Initialize(startXOffset, startYOffset, _canvasObj);
+
+            BoardUtils.board = _board;
+        }
+
+        public void UpdateReachablePoints(Tile tile)
+        {
+            List<CubePoint> reachablePoints = BoardUtils.GetReachablePoints(tile);
+            tile.SetReachablePoints(reachablePoints);
         }
 
 //        public void HighlightTiles(List<CubePoint> points, bool active)
