@@ -69,6 +69,17 @@ namespace Resources.Scripts.Utils.DataStructure
 		public int Count() {
 			return data.Count;
 		}
+
+		public bool Contains(T item)
+		{
+			return hashSet.Contains(item);
+		}
+
+		public void UpdateDistances(T item, int distance)
+		{
+			if (distances.ContainsKey(item))
+				distances[item] = distance;
+		}
 	
 //		public override string ToString() {
 //			string s = "";

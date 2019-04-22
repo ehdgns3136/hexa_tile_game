@@ -81,6 +81,8 @@ namespace Resources.Scripts
             }
             
             CubePoint currentPoint = tile.GetCubePoint();
+            distances[currentPoint] = 0;
+            
             PriorityQueue<CubePoint> toVisitPoints = new PriorityQueue<CubePoint>(distances);
             HashSet<CubePoint> visitedPoints = new HashSet<CubePoint>();
             
@@ -104,16 +106,16 @@ namespace Resources.Scripts
             {
                 CubePoint adjacentPoint = adjacentPoints[i];
 
-                
-                
-                if (board.ContainsPoint(adjacentPoint))
+                if (toVisitPoints.Contains(adjacentPoint))
                 {
-//                    if (toVisitPoints.)
+                    
+                } else if (board.ContainsPoint(adjacentPoint) && !visitedPoints.Contains(adjacentPoint))
+                {
                     int adjacentTileType = (int) board.GetTile(adjacentPoint).GetTileType();
                     int movableTileType = (int) startTile.GetUnit().GetMovableTileType();
 
                     if ((movableTileType & adjacentTileType) == adjacentTileType)
-                    {
+                    { 
                         toVisitPoints.Enqueue(adjacentPoint);
                     }
                 }
