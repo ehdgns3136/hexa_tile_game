@@ -63,24 +63,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Resources\Scripts\Board.cs" />
-    <Compile Include="Assets\Resources\Scripts\BoardManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\CubePoint.cs" />
-    <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\HexaPoint.cs" />
-    <Compile Include="Assets\Resources\Scripts\HexCell.cs" />
-    <Compile Include="Assets\Resources\Scripts\HexCoordinates.cs" />
-    <Compile Include="Assets\Resources\Scripts\HexGrid.cs" />
-    <Compile Include="Assets\Resources\Scripts\HexMesh.cs" />
-    <Compile Include="Assets\Resources\Scripts\Resource.cs" />
-    <Compile Include="Assets\Resources\Scripts\Struct1.cs" />
-    <Compile Include="Assets\Resources\Scripts\Tile.cs" />
-    <Compile Include="Assets\Resources\Scripts\Unit.cs" />
+    <Compile Include="Assets\Resources\Scripts\Boards\Board.cs" />
+    <Compile Include="Assets\Resources\Scripts\Boards\BoardMesh.cs" />
+    <Compile Include="Assets\Resources\Scripts\Boards\HexPoint.cs" />
+    <Compile Include="Assets\Resources\Scripts\Boards\HexTile.cs" />
+    <Compile Include="Assets\Resources\Scripts\Boards\Resource.cs" />
+    <Compile Include="Assets\Resources\Scripts\Boards\Unit.cs" />
+    <Compile Include="Assets\Resources\Scripts\Systems\BoardManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Systems\GameManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\BoardUtils.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\DataStructure\PriorityQueue.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoSingleton.cs" />
     <Compile Include="Assets\Resources\Scripts\Utils\MonoWeakSingleton.cs" />
-    <None Include="Assets\Resources\Scripts\NewSurfaceShader.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/ehdgn/hexa_tile_game/hexaTBS/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

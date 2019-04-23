@@ -8,20 +8,18 @@
       <e p="Assets" t="Include">
         <e p="Resources" t="Include">
           <e p="Scripts" t="Include">
-            <e p="Board.cs" t="Include" />
-            <e p="BoardManager.cs" t="Include" />
-            <e p="CubePoint.cs" t="Include" />
-            <e p="GameManager.cs" t="Include" />
-            <e p="HexaPoint.cs" t="Include" />
-            <e p="HexCell.cs" t="Include" />
-            <e p="HexCoordinates.cs" t="Include" />
-            <e p="HexGrid.cs" t="Include" />
-            <e p="HexMesh.cs" t="Include" />
-            <e p="NewSurfaceShader.shader" t="Include" />
-            <e p="Resource.cs" t="Include" />
-            <e p="Struct1.cs" t="Include" />
-            <e p="Tile.cs" t="Include" />
-            <e p="Unit.cs" t="Include" />
+            <e p="Boards" t="Include">
+              <e p="Board.cs" t="Include" />
+              <e p="BoardMesh.cs" t="Include" />
+              <e p="HexPoint.cs" t="Include" />
+              <e p="HexTile.cs" t="Include" />
+              <e p="Resource.cs" t="Include" />
+              <e p="Unit.cs" t="Include" />
+            </e>
+            <e p="Systems" t="Include">
+              <e p="BoardManager.cs" t="Include" />
+              <e p="GameManager.cs" t="Include" />
+            </e>
             <e p="Utils" t="Include">
               <e p="BoardUtils.cs" t="Include" />
               <e p="DataStructure" t="Include">
@@ -37,9 +35,7 @@
       <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
-      <e p="Temp" t="ExcludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-      </e>
+      <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
   </component>
 </project>

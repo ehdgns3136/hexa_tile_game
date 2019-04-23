@@ -1,36 +1,59 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Resources.Scripts.Utils.DataStructure;
+using UnityEngine;
 
 namespace Resources.Scripts
 {
     public class BoardUtils
     {
         public static Board board = null;
-        public static readonly CubePoint[] directionOffsets =
+        public static readonly HexPoint[] directions =
         {
-            new CubePoint(1, -1, 0),
-            new CubePoint(1, 0, -1),
-            new CubePoint(0, 1, -1),
-            new CubePoint(-1, 1, 0),
-            new CubePoint(-1, 0, 1),
-            new CubePoint(0, -1, 1)
+            new HexPoint(1, -1, 0),
+            new HexPoint(1, 0, -1),
+            new HexPoint(0, 1, -1),
+            new HexPoint(-1, 1, 0),
+            new HexPoint(-1, 0, 1),
+            new HexPoint(0, -1, 1)
+        };
+
+        public static readonly Color[] colors =
+        {
+            new Color(0.784f, 0.874f, 0.317f), 
+            new Color(0.501f, 0.654f, 0.486f),
+            new Color(0.631f, 0.768f, 0.329f),
         };
         
-        public static Tile GetTileAtDirection(CubePoint point, int direction)
+        public const float outerRadius = 10f;
+
+        public const float innerRadius = outerRadius * 0.866025404f; // sqrt(3)/2
+	
+        public static readonly Vector3[] corners = {
+            new Vector3(0f, outerRadius),
+            new Vector3(innerRadius, 0.5f * outerRadius),
+            new Vector3(innerRadius, -0.5f * outerRadius),
+            new Vector3(0f, -outerRadius),
+            new Vector3(-innerRadius, -0.5f * outerRadius),
+            new Vector3(-innerRadius, 0.5f * outerRadius),
+            new Vector3(0f, outerRadius)
+        };
+        
+        public static HexTile GetTileAtDirection(HexPoint point, int direction)
         {
             if (board == null)
                 return null;
             
-            CubePoint targetPoint = point + directionOffsets[direction];
+            HexPoint targetPoint = point + directions[direction];
             return board.GetTile(targetPoint) != null ? board.GetTile(targetPoint) : null;
         }
         
-        public static List<CubePoint> GetPointsWithinRadius(CubePoint point, int radius)
+        public static List<HexPoint> GetPointsWithinRadius(HexPoint point, int radius)
         {
             if (board == null)
                 return null;
             
-            List<CubePoint> resultPoints = new List<CubePoint>();
+            List<HexPoint> resultPoints = new List<HexPoint>();
             
             for (int i = 1; i <= radius; i++)
             {
@@ -40,18 +63,18 @@ namespace Resources.Scripts
             return resultPoints;
         }
         
-        public static List<CubePoint> GetPointsAtRange(CubePoint point, int range)
+        public static List<HexPoint> GetPointsAtRange(HexPoint point, int range)
         {
             if (board == null)
                 return null;
             
-            List<CubePoint> resultPoints = new List<CubePoint>();
-            CubePoint targetPoint = point + directionOffsets[4] * range;
+            List<HexPoint> resultPoints = new List<HexPoint>();
+            HexPoint targetPoint = point + directions[4] * range;
             for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < range; j++)
                 {
-                    targetPoint = targetPoint + directionOffsets[i];
+                    targetPoint = targetPoint + directions[i];
                     if (!board.ContainsPoint(targetPoint))
                         continue;
                     
@@ -62,7 +85,7 @@ namespace Resources.Scripts
             return resultPoints;
         }
 
-        public static List<CubePoint> GetReachablePoints(Tile tile)
+        public static List<HexPoint> GetReachablePoints(HexTile tile)
         {
             if (board == null)
                 return null;
@@ -70,21 +93,21 @@ namespace Resources.Scripts
             if (tile.GetUnit() == null)
                 return null;
             
-            List<CubePoint> resultPoints = new List<CubePoint>();
+            List<HexPoint> resultPoints = new List<HexPoint>();
 
-            Dictionary<CubePoint, int> distances = new Dictionary<CubePoint, int>();
+            Dictionary<HexPoint, int> distances = new Dictionary<HexPoint, int>();
             int maxDistance = 1000;
-            List<CubePoint> existPoints = board.GetCubePoints();
+            List<HexPoint> existPoints = board.GetHexPoints();
             for (int i = 0; i < existPoints.Count; i++)
             {
                 distances.Add(existPoints[i], maxDistance);
             }
             
-            CubePoint currentPoint = tile.GetCubePoint();
+            HexPoint currentPoint = tile.GetHexPoint();
             distances[currentPoint] = 0;
             
-            PriorityQueue<CubePoint> toVisitPoints = new PriorityQueue<CubePoint>(distances);
-            HashSet<CubePoint> visitedPoints = new HashSet<CubePoint>();
+            PriorityQueue<HexPoint> toVisitPoints = new PriorityQueue<HexPoint>(distances);
+            HashSet<HexPoint> visitedPoints = new HashSet<HexPoint>();
             
             Dijkstra(currentPoint, currentPoint, toVisitPoints, visitedPoints);
             
@@ -92,19 +115,19 @@ namespace Resources.Scripts
             return resultPoints;
         }
 
-        private static void Dijkstra(CubePoint startPoint, CubePoint currentPoint, PriorityQueue<CubePoint> toVisitPoints, HashSet<CubePoint> visitedPoints)
+        private static void Dijkstra(HexPoint startPoint, HexPoint currentPoint, PriorityQueue<HexPoint> toVisitPoints, HashSet<HexPoint> visitedPoints)
         {
             if (board == null)
                 return;
             
             visitedPoints.Add(currentPoint);
 
-            List<CubePoint> adjacentPoints = GetPointsWithinRadius(currentPoint, 1);
-            Tile startTile = board.GetTile(startPoint);
+            List<HexPoint> adjacentPoints = GetPointsWithinRadius(currentPoint, 1);
+            HexTile startTile = board.GetTile(startPoint);
                 
             for (int i = 0; i < adjacentPoints.Count; i++)
             {
-                CubePoint adjacentPoint = adjacentPoints[i];
+                HexPoint adjacentPoint = adjacentPoints[i];
 
                 if (toVisitPoints.Contains(adjacentPoint))
                 {
