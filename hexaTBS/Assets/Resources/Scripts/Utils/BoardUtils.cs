@@ -11,11 +11,11 @@ namespace Resources.Scripts
         public static readonly HexPoint[] directions =
         {
             new HexPoint(1, -1, 0),
-            new HexPoint(1, 0, -1),
-            new HexPoint(0, 1, -1),
-            new HexPoint(-1, 1, 0),
+            new HexPoint(0, -1, 1),
             new HexPoint(-1, 0, 1),
-            new HexPoint(0, -1, 1)
+            new HexPoint(-1, 1, 0),
+            new HexPoint(0, 1, -1),
+            new HexPoint(1, 0, -1),
         };
 
         public static readonly Color[] colors =
@@ -23,11 +23,19 @@ namespace Resources.Scripts
             new Color(0.784f, 0.874f, 0.317f), 
             new Color(0.501f, 0.654f, 0.486f),
             new Color(0.631f, 0.768f, 0.329f),
+            new Color(0.447f, 0.898f, 0.721f),
+            new Color(0.360f, 0.545f, 0.819f),
+            new Color(0.368f, 0.443f, 0.690f),
+            new Color(0.925f, 0.670f, 0.235f),
+            new Color(0.956f, 0.780f, 0.247f),
+            new Color(0.956f, 0.866f, 0.474f),
         };
         
         public const float outerRadius = 10f;
 
         public const float innerRadius = outerRadius * 0.866025404f; // sqrt(3)/2
+
+        public static Vector3 zOffset = new Vector3(0, -3f, 0);
 	
         public static readonly Vector3[] corners = {
             new Vector3(0f, outerRadius),
@@ -129,23 +137,20 @@ namespace Resources.Scripts
             {
                 HexPoint adjacentPoint = adjacentPoints[i];
 
-                if (toVisitPoints.Contains(adjacentPoint))
-                {
-                    
-                } else if (board.ContainsPoint(adjacentPoint) && !visitedPoints.Contains(adjacentPoint))
-                {
-                    int adjacentTileType = (int) board.GetTile(adjacentPoint).GetTileType();
-                    int movableTileType = (int) startTile.GetUnit().GetMovableTileType();
-
-                    if ((movableTileType & adjacentTileType) == adjacentTileType)
-                    { 
-                        toVisitPoints.Enqueue(adjacentPoint);
-                    }
-                }
+//                if (toVisitPoints.Contains(adjacentPoint))
+//                {
+//                    
+//                } else if (board.ContainsPoint(adjacentPoint) && !visitedPoints.Contains(adjacentPoint))
+//                {
+//                    int adjacentTileType = (int) board.GetTile(adjacentPoint).GetTileType();
+//                    int movableTileType = (int) startTile.GetUnit().GetMovableTileType();
+//
+//                    if ((movableTileType & adjacentTileType) == adjacentTileType)
+//                    { 
+//                        toVisitPoints.Enqueue(adjacentPoint);
+//                    }
+//                }
             }
-
-            
-            
         }
     }
 }

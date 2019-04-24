@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Resources.Scripts;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class BoardMesh : MonoBehaviour {
-
+public class BoardMesh : MonoBehaviour
+{
     Mesh hexMesh;
     List<Vector3> vertices;
     List<int> triangles;
@@ -12,7 +12,8 @@ public class BoardMesh : MonoBehaviour {
     
     MeshCollider meshCollider;
 
-    void Awake () {
+    private void Awake ()
+    {
         GetComponent<MeshFilter>().mesh = hexMesh = new Mesh();
         meshCollider = gameObject.AddComponent<MeshCollider>();
 
@@ -22,7 +23,8 @@ public class BoardMesh : MonoBehaviour {
         colors = new List<Color>();
     }
     
-    public void Triangulate (List<HexTile> tiles) {
+    public void Triangulate (List<HexTile> tiles)
+    {
         hexMesh.Clear();
         vertices.Clear();
         triangles.Clear();
@@ -38,20 +40,128 @@ public class BoardMesh : MonoBehaviour {
         meshCollider.sharedMesh = hexMesh;
     }
 	
-    void Triangulate (HexTile tile) {
-        Vector3 center = tile.GetPosition();
-        for (int i = 0; i < 6; i++)
+    private void Triangulate (HexTile hexTile)
+    {
+        Vector3 center = hexTile.GetPosition();
+        HexPoint hexPoint = hexTile.GetHexPoint();
+
+        if (hexTile.GetTileType() == HexTile.TileType.DEFAULT)
         {
-            AddTriangle(
-                center,
-                center + BoardUtils.corners[i],
-                center + BoardUtils.corners[i+1]
-            );
-            AddTriangleColor(tile.GetColor());
+            for (int i = 0; i < 6; i++)
+            {
+                AddTriangle(
+                    center,
+                    center + BoardUtils.corners[i],
+                    center + BoardUtils.corners[i+1]
+                );
+                AddTriangleColor(hexTile.GetColor());
+
+                HexTile rightDownTile = BoardUtils.GetTileAtDirection(hexPoint, 5);
+                if (rightDownTile != null && rightDownTile.GetTileType() == HexTile.TileType.LOW)
+                {
+                    AddQuad(
+                        center + BoardUtils.corners[2],
+                        center + BoardUtils.corners[3],
+                        center + BoardUtils.corners[2] + BoardUtils.zOffset,
+                        center + BoardUtils.corners[3] + BoardUtils.zOffset
+                    );
+                    AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.9f));
+                }
+
+                HexTile leftDownTile = BoardUtils.GetTileAtDirection(hexPoint, 4);
+                if (leftDownTile != null && leftDownTile.GetTileType() == HexTile.TileType.LOW)
+                {
+                    AddQuad(
+                        center + BoardUtils.corners[3],
+                        center + BoardUtils.corners[4],
+                        center + BoardUtils.corners[3] + BoardUtils.zOffset,
+                        center + BoardUtils.corners[4] + BoardUtils.zOffset
+                    );
+                    AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.8f));
+                }
+            }
+        } 
+        else if (hexTile.GetTileType() == HexTile.TileType.LOW)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (i == 0 || i == 5)
+                {
+                    AddTriangle(
+                        center + BoardUtils.zOffset,
+                        center + BoardUtils.corners[i] + BoardUtils.zOffset,
+                        center + BoardUtils.corners[i+1] + BoardUtils.zOffset
+                    );
+                }
+                else if (i == 1 || i == 2)
+                {
+                    HexTile rightDownTile = BoardUtils.GetTileAtDirection(hexPoint, 5);
+                    if (rightDownTile != null && rightDownTile.GetTileType() == HexTile.TileType.DEFAULT)
+                    {
+                        if (i == 1)
+                        {
+                            AddTriangle(
+                                center + BoardUtils.zOffset,
+                                center + BoardUtils.corners[i] + BoardUtils.zOffset,
+                                center + BoardUtils.corners[i+1]
+                            );
+                        }
+                        else
+                        {
+                            AddTriangle(
+                                center + BoardUtils.zOffset,
+                                center + BoardUtils.corners[i],
+                                center + BoardUtils.corners[i+1]
+                            );
+                        }
+                    }
+                    else
+                    {
+                        AddTriangle(
+                            center + BoardUtils.zOffset,
+                            center + BoardUtils.corners[i] + BoardUtils.zOffset,
+                            center + BoardUtils.corners[i+1] + BoardUtils.zOffset
+                        );
+                    }
+                } else if (i == 3 || i == 4)
+                {
+                    HexTile leftDownTile = BoardUtils.GetTileAtDirection(hexPoint, 4);
+                    if (leftDownTile != null && leftDownTile.GetTileType() == HexTile.TileType.DEFAULT)
+                    {
+                        if (i == 4)
+                        {
+                            AddTriangle(
+                                center + BoardUtils.zOffset,
+                                center + BoardUtils.corners[i],
+                                center + BoardUtils.corners[i+1] + BoardUtils.zOffset
+                            );
+                        }
+                        else
+                        {
+                            AddTriangle(
+                                center + BoardUtils.zOffset,
+                                center + BoardUtils.corners[i],
+                                center + BoardUtils.corners[i+1]
+                            );
+                        }
+                    }
+                    else
+                    {
+                        AddTriangle(
+                            center + BoardUtils.zOffset,
+                            center + BoardUtils.corners[i] + BoardUtils.zOffset,
+                            center + BoardUtils.corners[i+1] + BoardUtils.zOffset
+                        );
+                    }
+                }
+                
+                AddTriangleColor(hexTile.GetColor());
+            }
         }
     }
     
-    void AddTriangle (Vector3 v1, Vector3 v2, Vector3 v3) {
+    private void AddTriangle (Vector3 v1, Vector3 v2, Vector3 v3)
+    {
         int vertexIndex = vertices.Count;
         vertices.Add(v1);
         vertices.Add(v2);
@@ -61,7 +171,31 @@ public class BoardMesh : MonoBehaviour {
         triangles.Add(vertexIndex + 2);
     }
     
-    void AddTriangleColor (Color color) {
+    private void AddTriangleColor (Color color)
+    {
+        colors.Add(color);
+        colors.Add(color);
+        colors.Add(color);
+    }
+
+    private void AddQuad(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4)
+    {
+        int vertexIndex = vertices.Count;
+        vertices.Add(v1);
+        vertices.Add(v2);
+        vertices.Add(v3);
+        vertices.Add(v4);
+        triangles.Add(vertexIndex);
+        triangles.Add(vertexIndex + 1);
+        triangles.Add(vertexIndex + 2);
+        triangles.Add(vertexIndex + 1);
+        triangles.Add(vertexIndex + 2);
+        triangles.Add(vertexIndex + 3);
+    }
+
+    private void AddQuadColor(Color color)
+    {
+        colors.Add(color);
         colors.Add(color);
         colors.Add(color);
         colors.Add(color);

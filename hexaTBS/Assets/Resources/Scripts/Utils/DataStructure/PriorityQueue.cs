@@ -8,12 +8,10 @@ namespace Resources.Scripts.Utils.DataStructure
 	public class PriorityQueue<T> {
 		private List<T> data;
 		private Dictionary<T, int> distances;
-		private HashSet<T> hashSet;
 	
 		public PriorityQueue(Dictionary<T, int> distances) {
 			this.data = new List<T>();
 			this.distances = distances;
-			this.hashSet = new HashSet<T>();
 		}
 	
 		public void Enqueue(T item) {
@@ -28,8 +26,6 @@ namespace Resources.Scripts.Utils.DataStructure
 				data[pi] = tmp;
 				ci = pi;
 			}
-
-			hashSet.Add(item);
 		}
 	
 		public T Dequeue() {
@@ -55,8 +51,6 @@ namespace Resources.Scripts.Utils.DataStructure
 				data[ci] = tmp; // swap parent and child
 				pi = ci;
 			}
-
-			hashSet.Remove(frontItem);
 			
 			return frontItem;
 		}
@@ -70,41 +64,10 @@ namespace Resources.Scripts.Utils.DataStructure
 			return data.Count;
 		}
 
-		public bool Contains(T item)
-		{
-			return hashSet.Contains(item);
-		}
-
 		public void UpdateDistances(T item, int distance)
 		{
 			if (distances.ContainsKey(item))
 				distances[item] = distance;
 		}
-	
-//		public override string ToString() {
-//			string s = "";
-//			for (int i = 0; i < data.Count; ++i)
-//				s += data[i].ToString() + " ";
-//			s += "count = " + data.Count;
-//			return s;
-//		}
-//	
-//		public bool IsConsistent() {
-//			// is the heap property true for all data?
-//			if (data.Count == 0)
-//				return true;
-//			int li = data.Count - 1; // last index
-//			for (int pi = 0; pi < data.Count; ++pi) { // each parent index
-//				int lci = 2 * pi + 1; // left child index
-//				int rci = 2 * pi + 2; // right child index
-//	
-//				if (lci <= li && data[pi].CompareTo(data[lci]) > 0)
-//					return false; // if lc exists and it's greater than parent then bad.
-//				if (rci <= li && data[pi].CompareTo(data[rci]) > 0)
-//					return false; // check the right child too.
-//			}
-//			return true; // passed all checks
-//		}
-		// IsConsistent
 	}
 }

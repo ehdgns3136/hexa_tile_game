@@ -33,11 +33,12 @@ namespace Resources.Scripts
 //        private Sprite _sprite;
 
 
-        public HexTile(HexPoint hexPoint, Vector3 position, Color color)
+        public HexTile(HexPoint hexPoint, Vector3 position, Color color, TileType type)
         {
             _hexPoint = hexPoint;
             _position = position;
             _color = color;
+            _type = type;
             
             _unit = null;
             _resource = null;

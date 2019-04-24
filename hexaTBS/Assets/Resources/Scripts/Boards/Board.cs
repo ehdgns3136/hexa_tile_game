@@ -7,8 +7,8 @@ namespace Resources.Scripts
 {
     public class Board : MonoBehaviour
     {
-        public readonly int widthCount = 6;
-        public readonly int heightCount = 6;
+        public readonly int widthCount = 15;
+        public readonly int heightCount = 15;
         
         private Dictionary<HexPoint, HexTile> _hexTiles;
         private BoardMesh _mesh;
@@ -26,6 +26,7 @@ namespace Resources.Scripts
             
             _mesh = GetComponentInChildren<BoardMesh>();
             _hexTiles = new Dictionary<HexPoint, HexTile>();
+            BoardUtils.board = this;
             CreateTiles();
         }
 
@@ -78,7 +79,19 @@ namespace Resources.Scripts
             position.z = 0f;
 
             HexPoint hexPoint = HexPoint.FromOffsetPoint(x, y);
-            HexTile hexTile = new HexTile(hexPoint, position, Color.red);
+            HexTile.TileType type = (Random.Range(0, 10) & 1) == 0 ? HexTile.TileType.DEFAULT : HexTile.TileType.LOW;
+
+            Color color;
+            if (type == HexTile.TileType.LOW)
+            {
+                color = BoardUtils.colors[3];
+            }
+            else
+            {
+                color = BoardUtils.colors[Random.Range(0, 3)];                
+            }
+            
+            HexTile hexTile = new HexTile(hexPoint, position, color, type);
             _hexTiles.Add(hexPoint, hexTile);
 		
             Text label = Instantiate<Text>(cellLabelPrefab);
