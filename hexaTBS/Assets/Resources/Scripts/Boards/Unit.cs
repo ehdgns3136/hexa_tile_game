@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Resources.Scripts
 {
-    public class Unit : MonoBehaviour
+    public class Unit
     {
         private int _hp;
         private int _offense;
@@ -11,8 +11,10 @@ namespace Resources.Scripts
         private int _sight;
         private UnitType _type;
         
-        private HexTile.TileType _movableTileType;
+        private HexTile.TileHeight[] _movableTileType;
         private int _leftMovement;
+
+        public Sprite sprite;
         
         public enum UnitType
         {
@@ -29,8 +31,8 @@ namespace Resources.Scripts
             _movement = movement;
             _sight = sight;
             _type = type;
-            
-            _movableTileType = HexTile.TileType.LOWABLE;
+
+            _movableTileType = new[] {HexTile.TileHeight.DEFAULT};
             _leftMovement = _movement;
         }
 
@@ -44,9 +46,9 @@ namespace Resources.Scripts
             return _movement;
         }
 
-        public HexTile.TileType GetMovableTileType()
-        {
-            return _movableTileType;
-        }
+//        public HexTile.TileType GetMovableTileType()
+//        {
+//            return _movableTileType;
+//        }
     }
 }

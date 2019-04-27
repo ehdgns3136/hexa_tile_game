@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using Resources.Scripts.Utils.DataStructure;
 using UnityEngine;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.Utils
 {
     public class BoardUtils
     {
@@ -35,7 +35,7 @@ namespace Resources.Scripts
 
         public const float innerRadius = outerRadius * 0.866025404f; // sqrt(3)/2
 
-        public static Vector3 zOffset = new Vector3(0, -3f, 0);
+        public static Vector3 heightOffset = new Vector3(0, 3f, 0);
 	
         public static readonly Vector3[] corners = {
             new Vector3(0f, outerRadius),

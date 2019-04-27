@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.Utils
 {
     public class MonoWeakSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {

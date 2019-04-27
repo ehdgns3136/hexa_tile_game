@@ -1,6 +1,6 @@
 
 using System;
-using Resources.Scripts;
+using Resources.Scripts.Utils;
 using UnityEngine;
 
 public class HexPoint : IEquatable<HexPoint>

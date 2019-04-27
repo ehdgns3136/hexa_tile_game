@@ -1,6 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Resources.Scripts.Utils;
 using Resources.Scripts;
+using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class BoardMesh : MonoBehaviour
@@ -10,7 +13,7 @@ public class BoardMesh : MonoBehaviour
     List<int> triangles;
     List<Color> colors;
     
-    MeshCollider meshCollider;
+    public MeshCollider meshCollider;
 
     private void Awake ()
     {
@@ -38,126 +41,98 @@ public class BoardMesh : MonoBehaviour
         hexMesh.RecalculateNormals();
         
         meshCollider.sharedMesh = hexMesh;
+
+//        Mesh colliderMesh = new Mesh();
+//        
+//        List<Vector3> vertices2 = new List<Vector3>();
+//        List<int> triangles2 = new List<int>();
+//
+//        Vector3 boundSize = hexMesh.bounds.size;
+//        
+//        Vector3 v1 = new Vector3(-boundSize.x, boundSize.y, 0);
+//        Vector3 v2 = new Vector3(boundSize.x, boundSize.y, 0);
+//        Vector3 v3 = new Vector3(-boundSize.x, -boundSize.y, 0);
+//        Vector3 v4 = new Vector3(boundSize.x, -boundSize.y);
+//        
+//        int vertexIndex = vertices2.Count;
+//        vertices2.Add(v1);
+//        vertices2.Add(v2);
+//        vertices2.Add(v3);
+//        vertices2.Add(v4);
+//        triangles2.Add(vertexIndex);
+//        triangles2.Add(vertexIndex + 1);
+//        triangles2.Add(vertexIndex + 2);
+//        triangles2.Add(vertexIndex + 1);
+//        triangles2.Add(vertexIndex + 2);
+//        triangles2.Add(vertexIndex + 3);
+//
+//        colliderMesh.vertices = vertices2.ToArray();
+//        colliderMesh.triangles = triangles2.ToArray();
+//        colliderMesh.RecalculateNormals();
+//
+//        meshCollider.sharedMesh = colliderMesh;
+
     }
-	
+    
+//    Mesh SpriteToMesh(Sprite sprite)
+//    {
+//        Mesh mesh = new Mesh();
+//        mesh.vertices = Array.ConvertAll(sprite.vertices, i => (Vector3)i);
+//        mesh.uv = sprite.uv;
+//        mesh.triangles = Array.ConvertAll(sprite.triangles, i => (int)i);
+// 
+//        return mesh;
+//    }
+    
     private void Triangulate (HexTile hexTile)
     {
         Vector3 center = hexTile.GetPosition();
-        HexPoint hexPoint = hexTile.GetHexPoint();
+        
+        int height = hexTile.GetHeight();
 
-        if (hexTile.GetTileType() == HexTile.TileType.DEFAULT)
+        center += BoardUtils.heightOffset * (height - 1);
+
+        for (int i = 0; i < 6; i++)
         {
-            for (int i = 0; i < 6; i++)
-            {
-                AddTriangle(
-                    center,
-                    center + BoardUtils.corners[i],
-                    center + BoardUtils.corners[i+1]
-                );
-                AddTriangleColor(hexTile.GetColor());
-
-                HexTile rightDownTile = BoardUtils.GetTileAtDirection(hexPoint, 5);
-                if (rightDownTile != null && rightDownTile.GetTileType() == HexTile.TileType.LOW)
-                {
-                    AddQuad(
-                        center + BoardUtils.corners[2],
-                        center + BoardUtils.corners[3],
-                        center + BoardUtils.corners[2] + BoardUtils.zOffset,
-                        center + BoardUtils.corners[3] + BoardUtils.zOffset
-                    );
-                    AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.9f));
-                }
-
-                HexTile leftDownTile = BoardUtils.GetTileAtDirection(hexPoint, 4);
-                if (leftDownTile != null && leftDownTile.GetTileType() == HexTile.TileType.LOW)
-                {
-                    AddQuad(
-                        center + BoardUtils.corners[3],
-                        center + BoardUtils.corners[4],
-                        center + BoardUtils.corners[3] + BoardUtils.zOffset,
-                        center + BoardUtils.corners[4] + BoardUtils.zOffset
-                    );
-                    AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.8f));
-                }
-            }
-        } 
-        else if (hexTile.GetTileType() == HexTile.TileType.LOW)
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                if (i == 0 || i == 5)
-                {
-                    AddTriangle(
-                        center + BoardUtils.zOffset,
-                        center + BoardUtils.corners[i] + BoardUtils.zOffset,
-                        center + BoardUtils.corners[i+1] + BoardUtils.zOffset
-                    );
-                }
-                else if (i == 1 || i == 2)
-                {
-                    HexTile rightDownTile = BoardUtils.GetTileAtDirection(hexPoint, 5);
-                    if (rightDownTile != null && rightDownTile.GetTileType() == HexTile.TileType.DEFAULT)
-                    {
-                        if (i == 1)
-                        {
-                            AddTriangle(
-                                center + BoardUtils.zOffset,
-                                center + BoardUtils.corners[i] + BoardUtils.zOffset,
-                                center + BoardUtils.corners[i+1]
-                            );
-                        }
-                        else
-                        {
-                            AddTriangle(
-                                center + BoardUtils.zOffset,
-                                center + BoardUtils.corners[i],
-                                center + BoardUtils.corners[i+1]
-                            );
-                        }
-                    }
-                    else
-                    {
-                        AddTriangle(
-                            center + BoardUtils.zOffset,
-                            center + BoardUtils.corners[i] + BoardUtils.zOffset,
-                            center + BoardUtils.corners[i+1] + BoardUtils.zOffset
-                        );
-                    }
-                } else if (i == 3 || i == 4)
-                {
-                    HexTile leftDownTile = BoardUtils.GetTileAtDirection(hexPoint, 4);
-                    if (leftDownTile != null && leftDownTile.GetTileType() == HexTile.TileType.DEFAULT)
-                    {
-                        if (i == 4)
-                        {
-                            AddTriangle(
-                                center + BoardUtils.zOffset,
-                                center + BoardUtils.corners[i],
-                                center + BoardUtils.corners[i+1] + BoardUtils.zOffset
-                            );
-                        }
-                        else
-                        {
-                            AddTriangle(
-                                center + BoardUtils.zOffset,
-                                center + BoardUtils.corners[i],
-                                center + BoardUtils.corners[i+1]
-                            );
-                        }
-                    }
-                    else
-                    {
-                        AddTriangle(
-                            center + BoardUtils.zOffset,
-                            center + BoardUtils.corners[i] + BoardUtils.zOffset,
-                            center + BoardUtils.corners[i+1] + BoardUtils.zOffset
-                        );
-                    }
-                }
-                
-                AddTriangleColor(hexTile.GetColor());
-            }
+            AddTriangle(
+                center,
+                center + BoardUtils.corners[i],
+                center + BoardUtils.corners[i + 1]
+            );
+            AddTriangleColor(hexTile.GetColor());
         }
+
+        AddQuad(
+            center + BoardUtils.corners[2],
+            center + BoardUtils.corners[3],
+            center + BoardUtils.corners[2] + BoardUtils.heightOffset * -(height + 1),
+            center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1)
+        );
+        AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.9f));
+        
+//        AddQuad(
+//            center + BoardUtils.corners[2] + BoardUtils.heightOffset * -(height + 1),
+//            center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1),
+//            center + BoardUtils.corners[2] + BoardUtils.heightOffset * -(height + 3),
+//            center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 3)
+//        );
+//        AddQuadColor(new Color(0.8f, 0.8f, 0.8f));
+        
+        AddQuad(
+            center + BoardUtils.corners[3],
+            center + BoardUtils.corners[4],
+            center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1),
+            center + BoardUtils.corners[4] + BoardUtils.heightOffset * -(height + 1)
+        );
+        AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.75f));
+        
+//        AddQuad(
+//            center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1),
+//            center + BoardUtils.corners[4] + BoardUtils.heightOffset * -(height + 1),
+//            center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 3),
+//            center + BoardUtils.corners[4] + BoardUtils.heightOffset * -(height + 3)
+//        );
+//        AddQuadColor(new Color(0.8f, 0.8f, 0.8f));
     }
     
     private void AddTriangle (Vector3 v1, Vector3 v2, Vector3 v3)

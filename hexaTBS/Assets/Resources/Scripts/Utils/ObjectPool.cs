@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.Utils
 {
     [AddComponentMenu("SlotMaker/GameObject/Object Pool/Object Pool")]
     public class ObjectPool : MonoBehaviour

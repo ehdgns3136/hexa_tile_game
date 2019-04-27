@@ -18,27 +18,43 @@ namespace Resources.Scripts
         private Unit _unit;
         private Resource _resource;
 
-
-        public enum TileType
+        public enum TileHeight
         {
-            DEFAULT = 0x0001,
-            LOW = 0x0010,
-            LOWABLE = 0x0011,
-            HIGH = 0x0100,
-            HIGHABLE = 0x0101,
-            EVERYWHERE = 0x0111
+            LOW = 0x0001,
+            DEFAULT = 0x0010,
+            HIGH = 0x0100
         }
 
-        private TileType _type;
+        private TileHeight _tileHeight;
+        private int _height;
+
+        public TileHeight Height
+        {
+            get { return _tileHeight; }
+            set
+            {
+                _tileHeight = value;
+
+                int heightAsDecimal = (int) _tileHeight;
+                _height = 0;
+                
+                while (heightAsDecimal >= 16)
+                {
+                    heightAsDecimal = heightAsDecimal / 16;
+                    _height += 1;
+                }
+            }
+        }
+
 //        private Sprite _sprite;
 
 
-        public HexTile(HexPoint hexPoint, Vector3 position, Color color, TileType type)
+        public HexTile(HexPoint hexPoint, Vector3 position, Color color, TileHeight height)
         {
             _hexPoint = hexPoint;
             _position = position;
             _color = color;
-            _type = type;
+            Height = height;
             
             _unit = null;
             _resource = null;
@@ -66,9 +82,9 @@ namespace Resources.Scripts
             return _hexPoint;
         }
 
-        public TileType GetTileType()
+        public int GetHeight()
         {
-            return _type;
+            return _height;
         }
 
         public Vector3 GetPosition()
@@ -84,6 +100,11 @@ namespace Resources.Scripts
         public void SetColor(Color color)
         {
             _color = color;
+        }
+
+        public void SetHeight(TileHeight height)
+        {
+            Height = height;
         }
 
     }

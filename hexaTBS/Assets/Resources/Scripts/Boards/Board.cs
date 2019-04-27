@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Resources.Scripts.Utils;
 
 namespace Resources.Scripts
 {
@@ -34,37 +35,37 @@ namespace Resources.Scripts
         {
             _mesh.Triangulate(_hexTiles.Values.ToList());
         }
-        
-        void Update () {
-            if (Input.GetMouseButton(0)) {
-                HandleInput();
-            }
-        }
-
-        void HandleInput () {
-            Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(inputRay, out hit)) {
-                TouchCell(hit.point);
-            }
-        }
 	
-        void TouchCell (Vector3 position) {
+        public void UpdateCell (Vector3 position, Color color, HexTile.TileHeight height, bool add, bool remove) {
             position = transform.InverseTransformPoint(position);
             HexPoint hexPoint = HexPoint.FromPosition(position);
+
+            if (add && !_hexTiles.ContainsKey(hexPoint))
+            {
+                HexTile hexTile = new HexTile(hexPoint, position, color, height);
+                _hexTiles.Add(hexPoint, hexTile);
+            }
+            else if (remove && _hexTiles.ContainsKey(hexPoint))
+            {
+                _hexTiles.Remove(hexPoint);
+            }
+            else
+            {
+                HexTile hexTile = _hexTiles[hexPoint];
+                hexTile.SetColor(color);
+                hexTile.SetHeight(height);
+            }
             
-            HexTile hexTile = _hexTiles[hexPoint];
-            hexTile.SetColor(Color.black);
 		    _mesh.Triangulate(_hexTiles.Values.ToList());	
 		
             Debug.Log("touched at " + hexPoint.ToString());
         }
 
         private void CreateTiles()
-        {
-            for (int y = 0; y < heightCount; y++)
+        {            
+            for (int y = heightCount; y >= 0; y--)
             {
-                for (int x = 0; x < widthCount; x++)
+                for (int x = widthCount; x >= 0; x--)
                 {
                     CreateTile(x, y);
                 }
@@ -79,26 +80,20 @@ namespace Resources.Scripts
             position.z = 0f;
 
             HexPoint hexPoint = HexPoint.FromOffsetPoint(x, y);
-            HexTile.TileType type = (Random.Range(0, 10) & 1) == 0 ? HexTile.TileType.DEFAULT : HexTile.TileType.LOW;
+            HexTile.TileHeight height = (Random.Range(0, 10) & 1) == 0 ? HexTile.TileHeight.DEFAULT : HexTile.TileHeight.LOW;
 
             Color color;
-            if (type == HexTile.TileType.LOW)
+            if (height == HexTile.TileHeight.LOW)
             {
-                color = BoardUtils.colors[3];
+                color = BoardUtils.colors[Random.Range(3, 6)];
             }
             else
             {
                 color = BoardUtils.colors[Random.Range(0, 3)];                
             }
             
-            HexTile hexTile = new HexTile(hexPoint, position, color, type);
+            HexTile hexTile = new HexTile(hexPoint, position, color, height);
             _hexTiles.Add(hexPoint, hexTile);
-		
-            Text label = Instantiate<Text>(cellLabelPrefab);
-            label.rectTransform.SetParent(_gridCanvas.transform, false);
-            label.rectTransform.anchoredPosition = new Vector2(position.x, position.y);
-            label.text = hexPoint.ToStringOnSeparateLines();
-            label.color = Color.black;
         }
 
         public void AddToTiles(HexPoint hexPoint, HexTile hexTile)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.Utils
 {
     [AddComponentMenu("SlotMaker/GameObject/Object Pool/Pooled Object")]
     public class PooledObject : MonoBehaviour

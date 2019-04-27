@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using Resources.Scripts.Utils;
 using UnityEngine;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.Systems
 {
     public class BoardManager :MonoWeakSingleton<BoardManager>
     {
