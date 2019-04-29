@@ -117,9 +117,9 @@ namespace Resources.Scripts.InGame
             Add(y, point, tile);
         }
 
-        public void Triangulate()
+        public void Triangulate(bool first = false)
         {
-            _tilesMesh.Triangulate(ToList());
+            _tilesMesh.Triangulate(ToList(), first);
         }
 
         public void Initialize()

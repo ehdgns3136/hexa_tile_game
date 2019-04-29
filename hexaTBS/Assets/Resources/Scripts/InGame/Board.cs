@@ -21,7 +21,7 @@ namespace Resources.Scripts.InGame
         private void Start()
         {
             _tiles.CreateTiles(BoardUtils.width, BoardUtils.height);
-            _tiles.Triangulate();
+            _tiles.Triangulate(true);
         }
 	
         public void UpdateTile(Vector3 position, Color color, HexTile.TileHeight height, bool add, bool remove) {

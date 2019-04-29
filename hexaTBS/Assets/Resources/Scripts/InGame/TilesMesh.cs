@@ -24,7 +24,7 @@ namespace Resources.Scripts.InGame
             _colors = new List<Color>();
         }
     
-        public void Triangulate (List<HexTile> tiles)
+        public void Triangulate (List<HexTile> tiles, bool first)
         {
             _mesh.Clear();
             _vertices.Clear();
@@ -37,10 +37,13 @@ namespace Resources.Scripts.InGame
             _mesh.triangles = _triangles.ToArray();
             _mesh.colors = _colors.ToArray();
             _mesh.RecalculateNormals();
-    
-            Vector3 boundSize = _mesh.bounds.size;
-            boxCollider.size = boundSize;
-            boxCollider.offset = boundSize / 2 - (new Vector3(BoardUtils.innerRadius, BoardUtils.outerRadius) + BoardUtils.heightOffset);
+
+            if (first)
+            {
+                Vector3 boundSize = _mesh.bounds.size;
+                boxCollider.size = boundSize;
+                boxCollider.offset = boundSize / 2 - (new Vector3(BoardUtils.innerRadius, BoardUtils.outerRadius) + BoardUtils.heightOffset);
+            }
         }
             
         private void Triangulate (HexTile hexTile)
