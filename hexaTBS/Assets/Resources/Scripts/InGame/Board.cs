@@ -1,184 +1,75 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using Resources.Scripts.InGame;
 using UnityEngine;
 using UnityEngine.UI;
 using Resources.Scripts.Utils;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.InGame
 {
     public class Board : MonoBehaviour
     {
-        public readonly int widthCount = 15;
-        public readonly int heightCount = 15;
-        
-        private Dictionary<HexPoint, HexTile> _hexTiles;
         private Tiles _tiles;
-        private BoardMesh _mesh;
-        
-        private HexPoint _currentPoint;
-        private List<HexPoint> _currentHighlightPoints;
-        
-        private Canvas _gridCanvas;
-        
-        public Text cellLabelPrefab;
 
         private void Awake()
         {
-            _gridCanvas = GetComponentInChildren<Canvas>();
-            
-            _mesh = GetComponentInChildren<BoardMesh>();
-            _hexTiles = new Dictionary<HexPoint, HexTile>();
             BoardUtils.board = this;
-            CreateTiles();
+            _tiles = GetComponentInChildren<Tiles>();
         }
 
         private void Start()
         {
-            _mesh.Triangulate(_hexTiles.Values.ToList());
+            _tiles.CreateTiles(BoardUtils.width, BoardUtils.height);
+            _tiles.Triangulate();
         }
 	
         public void UpdateCell (Vector3 position, Color color, HexTile.TileHeight height, bool add, bool remove) {
             position = transform.InverseTransformPoint(position);
-            HexPoint hexPoint = HexPoint.FromPosition(position);
+            HexPoint point = HexPoint.FromPosition(position);
 
-            if (add && !_hexTiles.ContainsKey(hexPoint))
+            if (add && !_tiles.ContainsKey(point))
             {
-                HexTile hexTile = new HexTile(hexPoint, position, color, height);
-                _hexTiles.Add(hexPoint, hexTile);
+                int x = point.X + point.Z / 2;
+                int y = point.Z;
+                
+                Vector3 newPos;
+                newPos.x = (x + (y & 1) / 2f) * (BoardUtils.innerRadius * 2f);
+                newPos.y = y * BoardUtils.outerRadius * 1.5f;
+                newPos.z = 0f;
+                
+                HexTile tile = new HexTile(point, newPos, color, height);
+                _tiles.Add(point.Z, point, tile);
             }
-            else if (remove && _hexTiles.ContainsKey(hexPoint))
+            else if (remove && _tiles.ContainsKey(point))
             {
-                _hexTiles.Remove(hexPoint);
+                _tiles.Remove(point);
             }
-            else
+            else if (_tiles.ContainsKey(point))
             {
-                HexTile hexTile = _hexTiles[hexPoint];
+                HexTile hexTile = _tiles.Get(point);
                 hexTile.SetColor(color);
                 hexTile.SetHeight(height);
             }
             
-		    _mesh.Triangulate(_hexTiles.Values.ToList());	
+            _tiles.Triangulate();	
 		
-            Debug.Log("touched at " + hexPoint.ToString());
+            Debug.Log("touched at " + point.ToString());
         }
 
-        private void CreateTiles()
-        {            
-            for (int y = heightCount; y >= 0; y--)
-            {
-                for (int x = widthCount; x >= 0; x--)
-                {
-                    CreateTile(x, y);
-                }
-            }
-        }
-
-        private void CreateTile(int x, int y)
+        public HexTile GetTile(HexPoint point)
         {
-            Vector3 position;
-            position.x = (x + (y & 1) / 2f) * (BoardUtils.innerRadius * 2f);
-            position.y = y * BoardUtils.outerRadius * 1.5f;
-            position.z = 0f;
-
-            HexPoint hexPoint = HexPoint.FromOffsetPoint(x, y);
-            HexTile.TileHeight height = (Random.Range(0, 10) & 1) == 0 ? HexTile.TileHeight.DEFAULT : HexTile.TileHeight.LOW;
-
-            Color color;
-            if (height == HexTile.TileHeight.LOW)
-            {
-                color = BoardUtils.colors[Random.Range(3, 6)];
-            }
-            else
-            {
-                color = BoardUtils.colors[Random.Range(0, 3)];                
-            }
-            
-            HexTile hexTile = new HexTile(hexPoint, position, color, height);
-            _hexTiles.Add(hexPoint, hexTile);
-        }
-
-        public void AddToTiles(HexPoint hexPoint, HexTile hexTile)
-        {
-            _hexTiles.Add(hexPoint, hexTile);
-        }
-
-        public HexTile GetTile(HexPoint hexPoint)
-        {
-            if (!_hexTiles.ContainsKey(hexPoint))
-                return null;
-            return _hexTiles[hexPoint];
+            return _tiles.Get(point);
         }
         
         public List<HexPoint> GetHexPoints()
         {
-            return _hexTiles.Keys.ToList();
+            return _tiles.Keys();
         }
         
         public bool ContainsPoint(HexPoint hexPoint)
         {
-            return _hexTiles.ContainsKey(hexPoint);
-        }
-        
-        private void LoadTiles()
-        {
-//            _tilePrefab = UnityEngine.Resources.Load("Prefabs/Tile"); // note: not .prefab!
-            // load from map file later made by kinda map tool
-            
-//            float length = 1f; // one side length of hexagon
-//            float xOffset = length * Mathf.Sqrt(3);
-//            float yOffset = length * 3 / 2;
-//            
-//            for (int i = 0; i < 10; i++)
-//            {
-//                for (int j = 0; j < 10; j++)
-//                {
-//                    if (i % 3 == 0 && (j % 7 == 0 || j % 6 == 0)) continue;
-//                    
-//                    float xPos = xOffset * j + xOffset / 2 * (i & 1);
-//                    float yPos = - yOffset * i;
-//                    
-//                    LoadTile(_startXOffset + xPos, _startYOffset + yPos, i, j, length);
-//                }
-//            }
-//
-////            foreach (var cubePoint in cubeCoordinates.Keys)
-////            {
-////                if (GetTile(cubePoint) != null)
-////                    GetTile(cubePoint).SetHighlightPoints(GetPointsWithinRadius(cubePoint, 2));
-////            }
-        }
-//        
-//        private void LoadTile(float x, float y, int row, int column, float length)
-//        {   
-//            GameObject tileObj = (GameObject) GameObject.Instantiate(_tilePrefab, Vector3.zero, Quaternion.identity);
-//            tileObj.transform.position = new Vector3(x, y);
-//            tileObj.transform.SetParent(_canvasObj.transform);
-//            
-//            HexaPoint hexaPoint = new HexaPoint(row, column);
-//            CubePoint cubePoint = new CubePoint(row, column);
-//            
-//            Tile tile = tileObj.GetComponent<Tile>();
-//            tile.Initialize(hexaPoint, cubePoint, length);
-//            LoadUnit(x, y, row, column, tile);
-//            
-//            _hexaCoordinates.Add(hexaPoint, tile);
-//            _cubeCoordinates.Add(cubePoint, tile);
-//        }
-//
-//        private void LoadUnit(float x, float y, int row, int column, Tile tile)
-//        {
-//            if (row == 1 && column == 1)
-//            {
-//                Object unitPrefab = UnityEngine.Resources.Load("Prefabs/Unit"); // note: not .prefab!
-//                
-//                GameObject unitObj = (GameObject) GameObject.Instantiate(unitPrefab, Vector3.zero, Quaternion.identity);
-//                unitObj.transform.position = new Vector3(x, y);
-//                unitObj.transform.SetParent(_canvasObj.transform);
-//                
-//                Unit unit = unitObj.GetComponent<Unit>();
-//                unit.Initialize(10, 3, 1, 3, 2, Unit.UnitType.HUMAN);
-//                tile.SetUnit(unit);
-//            }
-//        }
+            return _tiles.ContainsKey(hexPoint);
+        } 
     }
 }

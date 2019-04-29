@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Resources.Scripts;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.InGame
 {
     
-    public class HexTile
+    public class HexTile : IEquatable<HexTile>
     {
-        private HexPoint _hexPoint;
+        private HexPoint _point;
         private Vector3 _position;
         private Color _color;
     
@@ -49,9 +49,9 @@ namespace Resources.Scripts
 //        private Sprite _sprite;
 
 
-        public HexTile(HexPoint hexPoint, Vector3 position, Color color, TileHeight height)
+        public HexTile(HexPoint point, Vector3 position, Color color, TileHeight height)
         {
-            _hexPoint = hexPoint;
+            _point = point;
             _position = position;
             _color = color;
             Height = height;
@@ -62,6 +62,17 @@ namespace Resources.Scripts
 //            BoardManager.Instance.UpdateReachablePoints(this);
         }
 
+        public bool Equals(HexTile tile)
+        {
+            if (tile == null) return false;
+            return _point.Equals(tile.GetPoint());
+        }
+
+        public override int GetHashCode()
+        {
+            return _point.GetHashCode();
+        }
+        
         public void SetReachablePoints(List<HexPoint> points)
         {
             _reachablePoints = points;
@@ -77,9 +88,9 @@ namespace Resources.Scripts
             return _unit;
         }
         
-        public HexPoint GetHexPoint()
+        public HexPoint GetPoint()
         {
-            return _hexPoint;
+            return _point;
         }
 
         public int GetHeight()

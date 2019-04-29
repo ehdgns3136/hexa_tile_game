@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Resources.Scripts.InGame;
 using Resources.Scripts.Utils.DataStructure;
 using UnityEngine;
 
@@ -35,8 +36,6 @@ namespace Resources.Scripts.Utils
 
         public const float innerRadius = outerRadius * 0.866025404f; // sqrt(3)/2
 
-        public static Vector3 heightOffset = new Vector3(0, 3f, 0);
-	
         public static readonly Vector3[] corners = {
             new Vector3(0f, outerRadius),
             new Vector3(innerRadius, 0.5f * outerRadius),
@@ -46,6 +45,10 @@ namespace Resources.Scripts.Utils
             new Vector3(-innerRadius, 0.5f * outerRadius),
             new Vector3(0f, outerRadius)
         };
+        
+        public static Vector3 heightOffset = new Vector3(0, 3f, 0);
+        public static int width = 15;
+        public static int height = 15;
         
         public static HexTile GetTileAtDirection(HexPoint point, int direction)
         {
@@ -111,7 +114,7 @@ namespace Resources.Scripts.Utils
                 distances.Add(existPoints[i], maxDistance);
             }
             
-            HexPoint currentPoint = tile.GetHexPoint();
+            HexPoint currentPoint = tile.GetPoint();
             distances[currentPoint] = 0;
             
             PriorityQueue<HexPoint> toVisitPoints = new PriorityQueue<HexPoint>(distances);

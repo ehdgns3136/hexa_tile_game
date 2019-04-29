@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Resources.Scripts
+namespace Resources.Scripts.InGame
 {
     public class Unit
     {
