@@ -61,6 +61,7 @@ namespace Resources.Scripts.InGame
                 AddTriangleColor(hexTile.GetColor());
             }
     
+            // side quad
             AddQuad(
                 center + BoardUtils.corners[2],
                 center + BoardUtils.corners[3],
@@ -68,14 +69,6 @@ namespace Resources.Scripts.InGame
                 center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1)
             );
             AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.8f));
-            
-    AddQuad(
-        center + BoardUtils.corners[2] + BoardUtils.heightOffset * -(height + 1),
-        center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1),
-        center + BoardUtils.corners[2] + BoardUtils.heightOffset * -(height + 3),
-        center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 3)
-    );
-    AddQuadColor(new Color(0.5f, 0.5f, 0.5f));
             
             AddQuad(
                 center + BoardUtils.corners[3],
@@ -85,13 +78,23 @@ namespace Resources.Scripts.InGame
             );
             AddQuadColor(Color.Lerp(Color.black, hexTile.GetColor(), 0.65f));
             
-    AddQuad(
-        center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1),
-        center + BoardUtils.corners[4] + BoardUtils.heightOffset * -(height + 1),
-        center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 3),
-        center + BoardUtils.corners[4] + BoardUtils.heightOffset * -(height + 3)
-    );
-    AddQuadColor(new Color(0.5f, 0.5f, 0.5f));
+            
+            // lower ground
+            AddQuad(
+                center + BoardUtils.corners[2] + BoardUtils.heightOffset * -(height + 1),
+                center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1),
+                center + BoardUtils.corners[2] + BoardUtils.heightOffset * -(height + 3),
+                center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 3)
+            );
+            AddQuadColor(new Color(0.5f, 0.5f, 0.5f));
+            
+            AddQuad(
+                center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 1),
+                center + BoardUtils.corners[4] + BoardUtils.heightOffset * -(height + 1),
+                center + BoardUtils.corners[3] + BoardUtils.heightOffset * -(height + 3),
+                center + BoardUtils.corners[4] + BoardUtils.heightOffset * -(height + 3)
+            );
+            AddQuadColor(new Color(0.5f, 0.5f, 0.5f));
         }
         
         private void AddTriangle (Vector3 v1, Vector3 v2, Vector3 v3)
