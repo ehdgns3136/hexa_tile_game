@@ -12,6 +12,7 @@ namespace Resources.Scripts
         public readonly int heightCount = 15;
         
         private Dictionary<HexPoint, HexTile> _hexTiles;
+        private Tiles _tiles;
         private BoardMesh _mesh;
         
         private HexPoint _currentPoint;

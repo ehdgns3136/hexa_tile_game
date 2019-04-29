@@ -1,6 +1,6 @@
 namespace Resources.Scripts
 {
-    public class GameManager
+    public class Tiles
     {
         
     }
