@@ -24,7 +24,7 @@ namespace Resources.Scripts.InGame
             _tiles.Triangulate();
         }
 	
-        public void UpdateCell (Vector3 position, Color color, HexTile.TileHeight height, bool add, bool remove) {
+        public void UpdateTile(Vector3 position, Color color, HexTile.TileHeight height, bool add, bool remove) {
             position = transform.InverseTransformPoint(position);
             HexPoint point = HexPoint.FromPosition(position);
 
@@ -51,10 +51,15 @@ namespace Resources.Scripts.InGame
                 hexTile.SetColor(color);
                 hexTile.SetHeight(height);
             }
-            
-            _tiles.Triangulate();	
-		
-            Debug.Log("touched at " + point.ToString());
+
+            _tiles.Triangulate();
+        }
+
+        public void InitializeTiles()
+        {
+            _tiles.Initialize();
+            _tiles.CreateTiles(BoardUtils.width, BoardUtils.height);
+            _tiles.Triangulate();
         }
 
         public HexTile GetTile(HexPoint point)

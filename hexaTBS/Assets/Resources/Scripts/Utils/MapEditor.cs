@@ -40,8 +40,8 @@ namespace Resources.Scripts.Utils
                 new Color(0.956f, 0.866f, 0.474f)
             };
             
-            SelectColor(0);
-            SelectHeight(HexTile.TileHeight.DEFAULT);
+            OnChangeColor(0);
+            OnChangeHeight(HexTile.TileHeight.DEFAULT);
         }
 
         void Update () {
@@ -57,21 +57,21 @@ namespace Resources.Scripts.Utils
             
             if (hit.collider != null)
             {
-                board.UpdateCell(hit.point, colors[selectedColor], selectedHeight, add, remove);
+                board.UpdateTile(hit.point, colors[selectedColor], selectedHeight, add, remove);
             }
         }
 
-        public void SelectColor (int index)
+        public void OnChangeColor(int index)
         {
             selectedColor = index;
         }
 
-        public void SelectHeight(HexTile.TileHeight height)
+        public void OnChangeHeight(HexTile.TileHeight height)
         {
             selectedHeight = height;
         }
 
-        public void SelectAdd()
+        public void OnAdd()
         {
             if (add) add = false;
             else add = true;
@@ -79,12 +79,27 @@ namespace Resources.Scripts.Utils
             remove = false;
         }
 
-        public void SelectRemove()
+        public void OnRemove()
         {
             add = false;
 
             if (remove) remove = false;
             else remove = true;
+        }
+
+        public void OnSave()
+        {
+            
+        }
+
+        public void OnLoad()
+        {
+            
+        }
+
+        public void OnInitialize()
+        {
+            board.InitializeTiles();
         }
     }
 }

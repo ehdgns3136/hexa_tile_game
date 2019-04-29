@@ -14,8 +14,7 @@ namespace Resources.Scripts.InGame
 
         private void Awake()
         {
-            _tilesDict = new Dictionary<HexPoint, HexTile>();
-            _tilesList = new List<List<HexTile>>();
+            Initialize();
             _tilesMesh = GetComponentInChildren<TilesMesh>();
         }
 
@@ -121,6 +120,12 @@ namespace Resources.Scripts.InGame
         public void Triangulate()
         {
             _tilesMesh.Triangulate(ToList());
+        }
+
+        public void Initialize()
+        {
+            _tilesDict = new Dictionary<HexPoint, HexTile>();
+            _tilesList = new List<List<HexTile>>();
         }
     }
 }

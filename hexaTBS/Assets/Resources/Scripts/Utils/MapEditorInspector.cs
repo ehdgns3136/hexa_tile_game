@@ -33,7 +33,7 @@ namespace Resources.Scripts.Utils
                 }
                 if (GUILayout.Button(""))
                 {
-                    mapEditor.SelectColor(i);
+                    mapEditor.OnChangeColor(i);
                 }
             }
             
@@ -44,7 +44,7 @@ namespace Resources.Scripts.Utils
             HexTile.TileHeight selectedHeight = (HexTile.TileHeight) EditorGUILayout.EnumPopup("Height", mapEditor.selectedHeight);
             if (selectedHeight != mapEditor.selectedHeight)
             {
-                mapEditor.SelectHeight(selectedHeight);
+                mapEditor.OnChangeHeight(selectedHeight);
             }
 
             EditorGUILayout.BeginHorizontal();
@@ -53,17 +53,39 @@ namespace Resources.Scripts.Utils
             
             if (GUILayout.Button("Add", GUILayout.Height(30)))
             {
-                mapEditor.SelectAdd();
+                mapEditor.OnAdd();
             }
             
             GUI.color = mapEditor.remove ? mapEditor.editorSelectedColor : mapEditor.editorDefaultColor;
 
             if (GUILayout.Button("Remove", GUILayout.Height(30)))
             {
-                mapEditor.SelectRemove();
+                mapEditor.OnRemove();
             }
             
             EditorGUILayout.EndHorizontal();
+
+            GUI.color = mapEditor.editorDefaultColor;
+            
+            EditorGUILayout.BeginHorizontal();
+            
+            if (GUILayout.Button("Save", GUILayout.Height(30)))
+            {
+                mapEditor.OnSave();
+            }
+            
+            if (GUILayout.Button("Load", GUILayout.Height(30)))
+            {
+                mapEditor.OnLoad();
+            }
+            
+            EditorGUILayout.EndHorizontal();
+            
+            if (GUILayout.Button("Initialize", GUILayout.Height(30)))
+            {
+                mapEditor.OnInitialize();
+            }
+            
         }
     }
 }
