@@ -1,7 +1,10 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Resources.Scripts.InGame;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Windows;
+using System.Collections.Generic;
 
 namespace Resources.Scripts.Utils
 {
@@ -89,12 +92,28 @@ namespace Resources.Scripts.Utils
 
         public void OnSave()
         {
-            
+            var path = EditorUtility.SaveFilePanel(
+                "Save Map as Json",
+                "",
+                "Map" + ".json",
+                "json");
+
+            if (path.Length != 0)
+            {
+                string json = JsonConvert.SerializeObject(board.GetTilesAsJson().ToArray());
+                System.IO.File.WriteAllText(path, json);
+            }
         }
 
         public void OnLoad()
         {
-            
+            string path = EditorUtility.OpenFilePanel("Choose json", "", "json");
+            if (path.Length != 0)
+            {
+                string json = System.IO.File.ReadAllText(path);
+                List<HexTileJson> jsonList = JsonConvert.DeserializeObject<List<HexTileJson>>(json);
+                board.LoadJsonTileList(jsonList);
+            }
         }
 
         public void OnInitialize()

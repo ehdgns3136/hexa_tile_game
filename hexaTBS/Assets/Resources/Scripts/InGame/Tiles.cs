@@ -29,7 +29,8 @@ namespace Resources.Scripts.InGame
             
             if (_tilesList.Count <= y)
             {
-                for (int i = 0; i <= y - _tilesList.Count; i++)
+                int tileCount = _tilesList.Count;
+                for (int i = 0; i <= y - tileCount; i++)
                 {
                     _tilesList.Add(new List<HexTile>());
                 }
@@ -126,6 +127,12 @@ namespace Resources.Scripts.InGame
         {
             _tilesDict = new Dictionary<HexPoint, HexTile>();
             _tilesList = new List<List<HexTile>>();
+        }
+
+        public void CreateTile(HexPoint point, Vector3 position, Color color, HexTile.TileHeight height)
+        {
+            HexTile tile = new HexTile(point, position, color, height);
+            Add(point.Z, point, tile);
         }
     }
 }

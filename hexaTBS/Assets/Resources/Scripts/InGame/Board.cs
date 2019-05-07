@@ -75,6 +75,60 @@ namespace Resources.Scripts.InGame
         public bool ContainsPoint(HexPoint hexPoint)
         {
             return _tiles.ContainsKey(hexPoint);
-        } 
+        }
+
+        public List<HexTileJson> GetTilesAsJson()
+        {
+            List<HexTile> tileList = _tiles.ToList();
+            
+            List<HexTileJson> jsonList = new List<HexTileJson>();
+
+            for (int i = 0; i < tileList.Count; i++)
+            {
+                HexTileJson hexTileJson = new HexTileJson();
+
+                HexPointJson hexPointJson = new HexPointJson();
+                hexPointJson.x = tileList[i].GetPoint().X;
+                hexPointJson.y = tileList[i].GetPoint().Y;
+                hexPointJson.z = tileList[i].GetPoint().Z;
+
+                PointJson pointJson = new PointJson();
+                pointJson.x = tileList[i].GetPosition().x;
+                pointJson.y = tileList[i].GetPosition().y;
+                pointJson.z = tileList[i].GetPosition().z;
+                
+                ColorJson colorJson = new ColorJson();
+                colorJson.r = tileList[i].GetColor().r;
+                colorJson.g = tileList[i].GetColor().g;
+                colorJson.b = tileList[i].GetColor().b;
+                
+                TileHeightJson tileHeightJson = new TileHeightJson();
+                tileHeightJson.height = tileList[i].Height;
+
+                hexTileJson.hexPoint = hexPointJson;
+                hexTileJson.point = pointJson;
+                hexTileJson.color = colorJson;
+                hexTileJson.height = tileHeightJson;
+
+                jsonList.Add(hexTileJson);
+            }
+
+            return jsonList;
+        }
+
+        public void LoadJsonTileList(List<HexTileJson> jsonList)
+        {
+            _tiles.Initialize();
+            for (int i = 0; i < jsonList.Count; i++)
+            {
+                HexPoint point = new HexPoint(jsonList[i].hexPoint.x, jsonList[i].hexPoint.y, jsonList[i].hexPoint.z);
+                Vector3 position = new Vector3(jsonList[i].point.x, jsonList[i].point.y, jsonList[i].point.z);
+                Color color = new Color(jsonList[i].color.r, jsonList[i].color.g, jsonList[i].color.b);
+                HexTile.TileHeight height = jsonList[i].height.height;
+                
+                _tiles.CreateTile(point, position, color, height);
+            }
+            _tiles.Triangulate();
+        }
     }
 }
