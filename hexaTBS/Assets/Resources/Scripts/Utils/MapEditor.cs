@@ -94,7 +94,7 @@ namespace Resources.Scripts.Utils
         {
             var path = EditorUtility.SaveFilePanel(
                 "Save Map as Json",
-                "",
+                "Assets/Resources/Maps",
                 "Map" + ".json",
                 "json");
 
@@ -107,7 +107,7 @@ namespace Resources.Scripts.Utils
 
         public void OnLoad()
         {
-            string path = EditorUtility.OpenFilePanel("Choose json", "", "json");
+            string path = EditorUtility.OpenFilePanel("Choose json", "Assets/Resources/Maps", "json");
             if (path.Length != 0)
             {
                 string json = System.IO.File.ReadAllText(path);
